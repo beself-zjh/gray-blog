@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="navigation">
+	<button id="show_menu_button" onclick="show()" class="show-menu-button">
+	<img src="img/icon_nav.png"></img>
+	Menu
+	</button>
+	<div id="navigation" class="menu">
+		<!-- personal information introduction -->
+		<div id="menu_info" class="menu-info">
+			<button id="menu_info_cancel" class="menu-info-cancel" onclick="hide()">x</button>
+			<div id="menu_info_avatar" class="menu-info-avatar">
+				<img id="menu_info_avatar_content" class="menu-info-avatar-content" th:src="${navigationViewModel.avatarPath}"/>
+				<div id="menu_info_avatar_center" class="menu-info-avatar-center"></div>
+			</div>
+			<div id="menu_info_introduce" class="menu-info-introduce">
+				<table>
+				<tr>
+					<td>Name</td>
+					<td>:</td>
+					<td th:text="${navigationViewModel.name}"></td>
+				</tr>
+				<tr>
+					<td>Profession:</td>
+					<td>:</td>
+					<td th:text="${navigationViewModel.profession}"></td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td>:</td>
+					<td th:text="${navigationViewModel.email}"></td>
+				</tr>
+				<tr>
+					<td>Site age</td>
+					<td>:</td>
+					<td th:text="${navigationViewModel.ageOfSite}"></td>
+				</tr>
+				</table>
+			</div>
+		</div>
+		
+		<!-- catalog -->
+		<div id="menu_catalog" class="menu-catalog">
+			<table>
+			<tr>
+				<td><img src="img/icon_home.png"></td>
+				<td><a href="/">Home</a></td>
+				<td>···················································· I</td>
+			</tr>
+			<tr>
+				<td><img src="img/icon_catalog.png"></td>
+				<td><a href="/labels">Category</a></td>
+				<td>···················································· II</td>
+			</tr>
+			</table>
+		</div>
+		
+		
+		
+		<!-- the latest articles -->
+		<div class="menu-separator">
+			<span class="menu-separator-line"></span>
+			<span class="menu-separator-text">最新文章</span>
+			<span class="menu-separator-line"></span>
+		</div>
+		<div class="menu-articles_labels">
+		<div th:each="article : ${navigationViewModel.newArticles}" class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a	th:href="'/article?filename=' + ${article.title}"
+				th:text="${article.title}"></a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">AllllllSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASl</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">Allllllllllllllllllllllllllllllllllllllllllllllllllllllllllll</a>
+		</div>
+		<div class="menu-article_label">
+			<img src="img/icon_article.png"></img>
+			<a href="/catalog">All</a>
+		</div>
+		</div>
+		
+		
+		<!-- my labels -->
+		<div class="menu-separator">
+			<span class="menu-separator-line"></span>
+			<span class="menu-separator-text">我的标签</span>
+			<span class="menu-separator-line"></span>
+		</div>
+		<div id="menu_labels" class="menu-articles_labels">
+		<div th:each="label : ${navigationViewModel.labels}" class="menu-article_label">
+			<img src="img/icon_tag.png"></img>
+			<a  th:href="'/catalog?label=' + ${label}"
+				th:text="${label.label}"></a>
+		</div>
+		</div>
+		
+	</div>
+</div>
+</html>

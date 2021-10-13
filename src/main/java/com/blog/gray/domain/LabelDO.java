@@ -9,7 +9,17 @@ package com.blog.gray.domain;
 
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * @title: LabelDO.java
@@ -22,7 +32,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_label")
 public class LabelDO {
-	
+
 	/**
 	 * @Fields id : 唯一标识，自增
 	 */
@@ -31,7 +41,7 @@ public class LabelDO {
 	private Integer id;
 	
 	/**
-	 * @Fields label : 标签
+	 * @Fields label : 标签名
 	 */
 	@Column(unique = true)
 	private String label;
@@ -39,6 +49,7 @@ public class LabelDO {
 	/**
 	 * @Fields articleId : 关联文章
 	 */
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "labels")
 	private List<ArticleDO> articles;
 

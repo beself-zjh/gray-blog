@@ -10,7 +10,20 @@ package com.blog.gray.domain;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * @title: ArticleDO.java
@@ -22,6 +35,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "t_article")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class ArticleDO {	
 
 	/**
@@ -35,7 +49,7 @@ public class ArticleDO {
 	 * @Fields title : 标题
 	 */
 	@Column
-	private String title;
+	public String title;
 	
 	/**
 	 * @Fields lastUpdateTime : 上次更新时间
@@ -49,6 +63,7 @@ public class ArticleDO {
 	@Column
 	private Date createdTime;
 
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "articledo_labeldo", joinColumns = @JoinColumn(name = "article_id"),
 	inverseJoinColumns = @JoinColumn(name = "label_id"))
@@ -87,8 +102,16 @@ public class ArticleDO {
 		this.createdTime = createdTime;
 	}
 	
+	public List<LabelDO> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(List<LabelDO> labels) {
+		this.labels = labels;
+	}
+
 	@Override
 	public String toString() {
-		return "ArticleDO{}";
+		return "ArticleDO{" + title + "}";
 	}
 }
