@@ -6,7 +6,7 @@ html {
     height: 100%;
     width: 100%;
     font-family: sans-serif;
-    background: url("../img/bg_index.jpg") center center / 100% 100% no-repeat;
+    background: url("../img/bg_index.jpg") center center / 100% 100% no-repeat fixed;
     overflow-x: hidden;
     overflow-y: auto;
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Beself_zjh</title>
+	<link rel="stylesheet" type="text/css" href="css/navigation.css">
+	<link rel="stylesheet" type="text/css" href="css/article.css">
+	<script>
+		function show(){
+			document.getElementById("navigation").style.display = "block";
+		}
+		function hide(){
+			document.getElementById("navigation").style.display = "none";
+		}
+	</script>
+	<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript" src="js/vidbg.min.js"></script>
+	<script src="https://cdn.bootcss.com/showdown/1.3.0/showdown.min.js"></script>
+</head>
+<body>
+	<div th:replace="html/common/navigation :: navigation"></div>
+	
+	<!-- <input id="markdown" th:value="${articleViewModel.markdown}"> -->
+	<div><div id="content" class="content" th:utext="${articleViewModel.markdown}"></div></div>
+	<!-- <div id="large-header" class="large-header">
+		<canvas id="demo-canvas"></canvas>
+	</div> -->
+	<!-- <script src="js/TweenLite.min.js"></script>
+	<script src="js/EasePack.min.js"></script> -->
+	<!-- <script src="js/rAF.js"></script>
+	<script src="js/demo-2.js"></script> -->	
+	<!-- <script type="text/javascript">
+		var content = $("#markdown").val(); //使用el表达式获取后台返回的markdown内容
+    	var converter = new showdown.Converter(); //初始化转换器
+    	var htmlcontent  = converter.makeHtml(content); //将MarkDown转为html格式的内容
+    	$("#content").html(htmlcontent);//添加到div中显示出来
+	</script> -->
+</body>
+
+</html>

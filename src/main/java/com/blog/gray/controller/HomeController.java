@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.blog.gray.viewmodel.ArticleViewModel;
 import com.blog.gray.viewmodel.NavigationViewModel;
 
 /**
@@ -29,11 +31,22 @@ public class HomeController {
 	@Autowired
 	private NavigationViewModel navigationViewModel;
 	
+	@Autowired
+	private ArticleViewModel articleViewModel;
+	
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String homeHandler(Model model) {
 		model.addAttribute("navigationViewModel", navigationViewModel.flush());
 		
 		return "html/index";
+	}
+	
+	@RequestMapping(path = "/article", method = RequestMethod.GET)
+	public String articleHandler(@RequestParam String filename, Model model) {
+		model.addAttribute("navigationViewModel", navigationViewModel.flush());
+		model.addAttribute("articleViewModel", articleViewModel.flush("14771972"));
+		
+		return "html/article";
 	}
 
 }
