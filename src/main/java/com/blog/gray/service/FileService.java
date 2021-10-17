@@ -8,21 +8,21 @@
 package com.blog.gray.service;
 
 /**
- * @title: FileReadService.java
+ * @title: FileService.java
  * @package com.example.blog.service
- * @description: get kinds of file content.
+ * @description: 文件相关服务
  * @author: Zjh
  * @date: Sep 10, 2020 11:21:58 AM 
  * @version: V1.0   
  */
-public interface FileReadService {
+public interface FileService {
 
 	
 	/**
 	 * @title: mdFileRead
-	 * @description: read md file.
-	 * @param path: md file path
-	 * @return String - md file content
+	 * @description: 读取markdown文件
+	 * @param path 文件路径
+	 * @return String 文件内容
 	 */
 	public String mdFileRead(String path);
 	

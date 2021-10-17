@@ -7,7 +7,10 @@
  */
 package com.blog.gray.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.blog.gray.domain.ArticleDO;
 
@@ -20,5 +23,8 @@ import com.blog.gray.domain.ArticleDO;
  * @version: V1.0   
  */
 public interface ArticleRepository extends JpaRepository<ArticleDO, Integer> {
-
+	
+	@Query(value = "select t.id from ArticleDO t")
+	public List<Integer> findAllId();
+	
 }

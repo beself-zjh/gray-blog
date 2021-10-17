@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.blog.gray.domain.ConfigureEntity;
-import com.blog.gray.service.FileReadService;
+import com.blog.gray.service.FileService;
 import com.blog.gray.util.MarkdownUtil;
 
 /**
@@ -25,20 +25,27 @@ import com.blog.gray.util.MarkdownUtil;
 @Service
 public class ArticleViewModel {
 
+	/**
+	 * @Fields markdown : 文章内容
+	 */
+	private String markdown;
+	
+	private Long visits;
+	
 	@Autowired
 	private ConfigureEntity configureEntity;
 	
 	@Autowired
-	private FileReadService fileReadService;
+	private FileService fileService;
 	
 	@Autowired
 	private MarkdownUtil markdownUtil;
 	
-	private String markdown;
 
 	public ArticleViewModel flush(String filename) {
-		
-		setMarkdown(markdownUtil.markdownToHtml(fileReadService.mdFileRead(configureEntity.getArticleDirPath() + "\\" + filename + ".md")));
+		String path = configureEntity.getArticleDirPath() + "\\" + filename + ".md";
+		String markdownText = fileService.mdFileRead(path);
+		setMarkdown(markdownUtil.markdownToHtml(markdownText));
 		
 		return this;
 	}

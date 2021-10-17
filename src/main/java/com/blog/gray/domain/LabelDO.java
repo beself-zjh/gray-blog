@@ -47,6 +47,12 @@ public class LabelDO {
 	private String label;
 	
 	/**
+	 * @Fields count : 包含文章的数量
+	 */
+	@Column
+	private Integer count;
+	
+	/**
 	 * @Fields articleId : 关联文章
 	 */
 	@JsonIgnore

@@ -9,6 +9,7 @@ package com.blog.gray.util;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,7 +137,6 @@ public class RedisUtil {
 	public boolean lSet(String key, Object value) {
 		try {
 			redisTemplate.opsForList().rightPush(key, value);
-			System.out.println("dan");
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -160,6 +160,23 @@ public class RedisUtil {
 			return false;
 		}
 	}
+	
+	/**
+	 *@title: clear 
+	 *@description: 请空缓存
+	 *@return 成功 或 失败
+	 */
+	public boolean clear() {
+		try {
+			Set<String> keys = redisTemplate.keys("*");
+			redisTemplate.delete(keys);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 
 	/**
 	 * @param key  键

@@ -21,9 +21,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * @title: ArticleDO.java
@@ -35,7 +33,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  */
 @Entity
 @Table(name = "t_article")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class ArticleDO {	
 
 	/**
@@ -62,6 +59,11 @@ public class ArticleDO {
 	 */
 	@Column
 	private Date createdTime;
+	
+	/**
+	 * @Fields visits : 访问量
+	 */
+	private Long visits = 0L;
 
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -110,6 +112,14 @@ public class ArticleDO {
 		this.labels = labels;
 	}
 
+	public Long getVisits() {
+		return visits;
+	}
+
+	public void setVisits(Long visits) {
+		this.visits = visits;
+	}
+	
 	@Override
 	public String toString() {
 		return "ArticleDO{" + title + "}";

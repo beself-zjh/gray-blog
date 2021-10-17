@@ -12,25 +12,25 @@ import java.io.FileInputStream;
 
 import org.springframework.stereotype.Service;
 
-import com.blog.gray.service.FileReadService;
+import com.blog.gray.service.FileService;
 
 /**
- * @title: FileReadServiceImpl.java
+ * @title: FileServiceImpl.java
  * @package com.example.blog.service.impl
- * @description: get kinds of file content.
+ * @description: 文件相关服务
  * @author: Zjh
  * @date: Sep 10, 2020 11:23:45 AM
  * @version: V1.0
  */
 @Service
-public class FileReadServiceImpl implements FileReadService {
+public class FileServiceImpl implements FileService {
 
 	/**
 	 * @title: mdFileRead
-	 * @description: read md file.
+	 * @description: 读取markdown文件
 	 * @param path: md file path
-	 * @return String - md file content
-	 * @see com.example.blog.service.FileReadService#mdFileRead(java.lang.String)
+	 * @return String - 文件内容
+	 * @see com.FileService.blog.service.FileReadService#mdFileRead(java.lang.String)
 	 */
 	@Override
 	public String mdFileRead(String path) {

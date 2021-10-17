@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 import com.blog.gray.domain.ArticleDO;
 import com.blog.gray.domain.ConfigureEntity;
 import com.blog.gray.domain.LabelDO;
-import com.blog.gray.service.ArticleCollectService;
+import com.blog.gray.service.ArticleService;
+import com.blog.gray.service.LabelService;
 
 /**
  * @title: NavigationViewModel.java
@@ -33,7 +34,10 @@ public class NavigationViewModel {
 	private ConfigureEntity configureEntity;
 	
 	@Autowired
-	private ArticleCollectService articleCollectService;
+	private ArticleService articleService;
+	
+	@Autowired 
+	private LabelService labelService;
 
 	private String name;       //ConfigureEntity.name
 	private String profession; //ConfigureEntity.profession
@@ -51,11 +55,10 @@ public class NavigationViewModel {
 		setAvatarPath(configureEntity.getAvatarPath());
 
 		//update newArticles
-		setNewArticles(articleCollectService.findNewArticles(8));
+		setNewArticles(articleService.findNewArticles(8));
 
 		//update labels
-		List<LabelDO> allLabels = articleCollectService.findAllLabel();
-		setLabels(allLabels.subList(0, 10 <= allLabels.size() ? 10 : allLabels.size()));
+		setLabels(labelService.findAll());
 
 		//update ageOfSite
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

@@ -7,7 +7,10 @@
  */
 package com.blog.gray.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.blog.gray.domain.LabelDO;
 
@@ -20,5 +23,8 @@ import com.blog.gray.domain.LabelDO;
  * @version: V1.0   
  */
 public interface LabelRepository extends JpaRepository<LabelDO, Integer>{
-
+	
+	@Query(value = "select t.id from LabelDO t")
+	public List<Integer> findAllId();
+	
 }
