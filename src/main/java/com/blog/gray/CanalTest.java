@@ -25,7 +25,11 @@ import com.alibaba.otter.canal.protocol.CanalEntry.RowData;
  * @date 2019/2/27 上午10:01
  */
 public class CanalTest {
-    public static void main(String args[]) {
+    public void start() {
+    	// 创建连接器
+    	// 收集监听方法
+    	// 创建线程
+    	
         // 创建链接
         CanalConnector connector = CanalConnectors.newSingleConnector(
                 new InetSocketAddress(AddressUtils.getHostIp(),
@@ -62,7 +66,7 @@ public class CanalTest {
             connector.disconnect();
         }
     }
-    private static void printEntry(List<Entry> entrys) {
+    private void printEntry(List<Entry> entrys) {
         for (Entry entry : entrys) {
             if (entry.getEntryType() == EntryType.TRANSACTIONBEGIN
                     || entry.getEntryType() == EntryType.TRANSACTIONEND) {
@@ -95,7 +99,7 @@ public class CanalTest {
             }
         }
     }
-    private static void printColumn(List<Column> columns) {
+    private void printColumn(List<Column> columns) {
         for (Column column : columns) {
             System.out.println(column.getName() +
                     " : " + column.getValue() +

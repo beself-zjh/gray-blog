@@ -1,6 +1,8 @@
 package com.blog.gray.domain;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 /**
  * @title: ConfigureEntity.java
@@ -10,6 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @date: Sep 6, 2020 8:37:35 PM 
  * @version: V1.0   
  */
+@Order(Ordered.HIGHEST_PRECEDENCE)
 @ConfigurationProperties(prefix="config")
 public class ConfigureEntity {
 	
