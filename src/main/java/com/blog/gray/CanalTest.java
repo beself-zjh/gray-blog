@@ -9,23 +9,25 @@ package com.blog.gray;
 
 import java.net.InetSocketAddress;
 import java.util.List;
-import com.alibaba.otter.canal.client.CanalConnectors;
+
 import com.alibaba.otter.canal.client.CanalConnector;
+import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.common.utils.AddressUtils;
-import com.alibaba.otter.canal.protocol.Message;
 import com.alibaba.otter.canal.protocol.CanalEntry.Column;
 import com.alibaba.otter.canal.protocol.CanalEntry.Entry;
 import com.alibaba.otter.canal.protocol.CanalEntry.EntryType;
 import com.alibaba.otter.canal.protocol.CanalEntry.EventType;
 import com.alibaba.otter.canal.protocol.CanalEntry.RowChange;
 import com.alibaba.otter.canal.protocol.CanalEntry.RowData;
+import com.alibaba.otter.canal.protocol.Message;
 /**
  * CanalTest
  * @author www.xttblog.com
  * @date 2019/2/27 上午10:01
  */
-public class CanalTest {
-    public void start() {
+public class CanalTest implements Runnable{
+	@Override
+    public void run() {
     	// 创建连接器
     	// 收集监听方法
     	// 创建线程
@@ -106,4 +108,5 @@ public class CanalTest {
                     "    update=" + column.getUpdated());
         }
     }
+
 }

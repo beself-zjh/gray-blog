@@ -22,12 +22,51 @@ import org.springframework.core.annotation.Order;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ConfigurationProperties(prefix="canal.client")
 public class CanalConfig {
+	
+	/**
+	 * @Fields host : 目标主机地址
+	 */
 	private String host;
+	
+	/**
+	 * @Fields port : 目标主机端口
+	 */
 	private int port;
+	
+	/**
+	 * @Fields userName : canal用户名
+	 */
 	private String userName;
+	
+	/**
+	 * @Fields password : canal密码
+	 */
 	private String password;
+	
+	/**
+	 * @Fields filter : 目标数据库 / 表
+	 */
 	private String filter;
+	
+	/**
+	 * @Fields destination : topic
+	 */
 	private String destination;
+	
+	/**
+	 * @Fields retryCount : 报错重试次数
+	 */
+	private int retryCount;
+	
+	/**
+	 * @Fields acquireInterval : 监听间隔
+	 */
+	private int acquireInterval;
+	
+	/**
+	 * @Fields batchSize : 单次提取日志数量
+	 */
+	private int batchSize;
 	
 	public String getHost() {
 		return host;
@@ -76,4 +115,29 @@ public class CanalConfig {
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
+	
+	public int getRetryCount() {
+		return retryCount;
+	}
+
+	public void setRetryCount(int retryCount) {
+		this.retryCount = retryCount;
+	}
+
+	public int getAcquireInterval() {
+		return acquireInterval;
+	}
+
+	public void setAcquireInterval(int acquireInterval) {
+		this.acquireInterval = acquireInterval;
+	}
+
+	public int getBatchSize() {
+		return batchSize;
+	}
+
+	public void setBatchSize(int batchSize) {
+		this.batchSize = batchSize;
+	}
+
 }

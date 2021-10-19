@@ -33,7 +33,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisConfig extends CachingConfigurerSupport {
 
     /**
-     * retemplate相关配置
+     * @description: retemplate相关配置
      * @param factory
      * @return
      */
@@ -68,8 +68,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     /**
-     * 对hash类型的数据操作
-     *
+     * @description: 对hash类型的数据操作
      * @param redisTemplate
      * @return
      */
@@ -79,8 +78,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     /**
-     * 对redis字符串类型数据操作
-     *
+     * @description:  对redis字符串类型数据操作
      * @param redisTemplate
      * @return
      */
@@ -90,8 +88,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     /**
-     * 对链表类型的数据操作
-     *
+     * @description:  对链表类型的数据操作
      * @param redisTemplate
      * @return
      */
@@ -101,8 +98,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     /**
-     * 对无序集合类型的数据操作
-     *
+     * @description: 对无序集合类型的数据操作
      * @param redisTemplate
      * @return
      */
@@ -112,8 +108,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     /**
-     * 对有序集合类型的数据操作
-     *
+     * @description: 对有序集合类型的数据操作
      * @param redisTemplate
      * @return
      */

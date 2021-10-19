@@ -10,7 +10,9 @@ package com.blog.gray.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
-import com.blog.gray.CanalTest;
+import com.blog.gray.factory.CanalConnectorFactory;
+import com.blog.gray.service.CanalClientService;
+import com.blog.gray.service.impl.CanalClientServiceImpl;
 
 /**
  * @title: CanalClientConfig.java
@@ -20,14 +22,27 @@ import com.blog.gray.CanalTest;
  * @date: Oct 18, 2021 3:45:25 PM 
  * @version: V1.0   
  */
-public class CanalClientConfig {
+public class CanalClientConfiguration {
 	
+	/**
+	 * @Fields canalConfig : canal配置参数
+	 */
 	@Autowired
 	private CanalConfig canalConfig;
 	
+	/**
+	 * @Fields canalConnectorFactory : canal连接器工厂
+	 */
+	@Autowired 
+	private CanalConnectorFactory canalConnectorFactory;
+	
+	/**
+	 * @title: canalClient 
+	 * @description: canal客户端自动装配&启动
+	 */
 	@Bean
-	private CanalTest canalClient() {
-		CanalTest canalTest = new CanalTest();
+	private CanalClientService canalClient() {
+		CanalClientService canalTest = new CanalClientServiceImpl(canalConnectorFactory);
 		canalTest.start();
 		return canalTest;
 	}

@@ -17,14 +17,14 @@ import java.lang.annotation.Target;
 
 import org.springframework.context.annotation.Import;
 
-import com.blog.gray.config.CanalClientConfig;
+import com.blog.gray.config.CanalClientConfiguration;
 import com.blog.gray.config.CanalConfig;
 
 @Documented
 @Retention(RUNTIME)
 @Target(TYPE)
 @Inherited
-@Import({CanalConfig.class, CanalClientConfig.class})
+@Import({CanalConfig.class, CanalClientConfiguration.class})
 /**
  * @title: EnableCanalClient.java
  * @package com.blog.gray.annotation

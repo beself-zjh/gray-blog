@@ -10,18 +10,28 @@ package com.blog.gray.util;
 /**
  * @title: ViewCodeUtil.java
  * @package com.blog.gray.util
- * @description: TODO
+ * @description: 异常创建工具
  * @author: Zjh
  * @date: Oct 16, 2021 3:50:44 PM 
  * @version: V1.0   
  */
 public class ViewCodeUtil {
 
+	/**
+	 * @title: ViewCodeUtil.java
+	 * @package com.blog.gray.util
+	 * @description: 异常类型
+	 */
 	public enum ViewResultCodeEnum {
 		ARTICLE_NOT_EXIST,
 		LABEL_NOT_EXIST
 	}
 	
+	/**
+	 *@title: toException 
+	 *@description: 根据异常类型生成对应描述的运行时异常
+	 *@param viewResultCode 异常类型
+	 */
 	public static RuntimeException toException(ViewResultCodeEnum viewResultCode) {
 		switch(viewResultCode) {
 		case ARTICLE_NOT_EXIST:

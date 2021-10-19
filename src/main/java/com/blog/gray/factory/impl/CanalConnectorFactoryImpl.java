@@ -29,8 +29,12 @@ import com.blog.gray.factory.CanalConnectorFactory;
 @Service
 public class CanalConnectorFactoryImpl implements CanalConnectorFactory {
 
+	/**
+	 * @Fields canalConfig : canal配置参数
+	 */
 	@Autowired
 	private CanalConfig canalConfig;
+	
 	/**   
 	 * @title: newDefaultConnector
 	 * @description: 按照配置参数创建canal连接器
