@@ -16,16 +16,16 @@ import com.blog.gray.domain.LabelDO;
  * @package com.blog.gray.service
  * @description: 标签相关服务
  * @author: Zjh
- * @date: Oct 16, 2021 3:27:24 PM 
- * @version: V1.0   
+ * @date: Oct 16, 2021 3:27:24 PM
+ * @version: V1.0
  */
 public interface LabelService {
-	
+
 	/**
-	 *@title: findById 
-	 *@description: 根据id查找标签信息
-	 *@param id
-	 *@return 标签实体类
+	 * @title: findById
+	 * @description: 根据id查找标签信息
+	 * @param id
+	 * @return 标签实体类
 	 */
 	public LabelDO findById(int id);
 

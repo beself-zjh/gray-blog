@@ -19,12 +19,12 @@ import com.blog.gray.domain.ArticleDO;
  * @package com.blog.gray.dao
  * @description: 文章 数据访问对象
  * @author: Zjh
- * @date: Oct 6, 2021 8:08:15 PM 
- * @version: V1.0   
+ * @date: Oct 6, 2021 8:08:15 PM
+ * @version: V1.0
  */
 public interface ArticleRepository extends JpaRepository<ArticleDO, Integer> {
-	
+
 	@Query(value = "select t.id from ArticleDO t")
 	public List<Integer> findAllId();
-	
+
 }

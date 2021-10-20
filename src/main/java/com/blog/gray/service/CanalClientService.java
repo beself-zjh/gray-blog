@@ -12,20 +12,20 @@ package com.blog.gray.service;
  * @package com.blog.gray.service
  * @description: canal客户端
  * @author: Zjh
- * @date: Oct 18, 2021 4:26:46 PM 
- * @version: V1.0   
+ * @date: Oct 18, 2021 4:26:46 PM
+ * @version: V1.0
  */
 public interface CanalClientService {
 
 	/**
-	 *@title: start 
-	 *@description: 客户端启动
+	 * @title: start
+	 * @description: 客户端启动
 	 */
 	public void start();
-	
+
 	/**
-	 *@title: stop 
-	 *@description: 客户端停止
+	 * @title: stop
+	 * @description: 客户端停止
 	 */
 	public void stop();
 }

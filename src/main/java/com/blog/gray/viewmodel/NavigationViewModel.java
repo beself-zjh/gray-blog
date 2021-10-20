@@ -20,8 +20,8 @@ import com.blog.gray.service.LabelService;
  * @package com.example.blog.viewmodel
  * @description: binding with navigation frame.
  * @author: Zjh
- * @date: Sep 6, 2020 8:26:21 PM 
- * @version: V1.0   
+ * @date: Sep 6, 2020 8:26:21 PM
+ * @version: V1.0
  */
 @Service
 @EnableConfigurationProperties(ConfigureEntity.class)
@@ -32,35 +32,35 @@ public class NavigationViewModel {
 	 */
 	@Autowired
 	private ConfigureEntity configureEntity;
-	
+
 	@Autowired
 	private ArticleService articleService;
-	
-	@Autowired 
+
+	@Autowired
 	private LabelService labelService;
 
-	private String name;       //ConfigureEntity.name
-	private String profession; //ConfigureEntity.profession
-	private String email;      //ConfigureEntity.email
-	private String avatarPath; //ConfigureEntity.avatarPath
-	private String ageOfSite;  //calculate by ConfigureEntity.siteCreatedTime
-	private List<ArticleDO> newArticles; //the newest 8 articles
-	private List<LabelDO> labels; //no more than 10 labels
-	
+	private String name; // ConfigureEntity.name
+	private String profession; // ConfigureEntity.profession
+	private String email; // ConfigureEntity.email
+	private String avatarPath; // ConfigureEntity.avatarPath
+	private String ageOfSite; // calculate by ConfigureEntity.siteCreatedTime
+	private List<ArticleDO> newArticles; // the newest 8 articles
+	private List<LabelDO> labels; // no more than 10 labels
+
 	public NavigationViewModel flush() {
-		//obtain configure information
+		// obtain configure information
 		setName(configureEntity.getName());
 		setProfession(configureEntity.getProfession());
 		setEmail(configureEntity.getEmail());
 		setAvatarPath(configureEntity.getAvatarPath());
 
-		//update newArticles
+		// update newArticles
 		setNewArticles(articleService.findNewArticles(8));
 
-		//update labels
+		// update labels
 		setLabels(labelService.findAll());
 
-		//update ageOfSite
+		// update ageOfSite
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date siteCreatedTime = simpleDateFormat.parse(this.configureEntity.getSiteCreatedTime());
@@ -69,7 +69,7 @@ public class NavigationViewModel {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		return this;
 	}
 
@@ -128,5 +128,5 @@ public class NavigationViewModel {
 	public void setLabels(List<LabelDO> labels) {
 		this.labels = labels;
 	}
-	
+
 }

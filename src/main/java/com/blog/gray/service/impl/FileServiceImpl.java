@@ -34,23 +34,23 @@ public class FileServiceImpl implements FileService {
 	 */
 	@Override
 	public String mdFileRead(String path) {
-		//TODO 代码简洁
+		// TODO 代码简洁
 		String content = new String();
 		try {
 			File markdownFile = new File(path);
-		    if(!markdownFile.exists()){
-		        return null;
-		    }
-		    FileInputStream inputStream = new FileInputStream(markdownFile);
-		    int length = inputStream.available();
-		    byte buffer[] = new byte[length];
-		    inputStream.read(buffer);
-		    inputStream.close();
-		    content =new String(buffer, "utf-8");
-		} catch(Exception e) {
-			e.printStackTrace();//TODO log
+			if (!markdownFile.exists()) {
+				return null;
+			}
+			FileInputStream inputStream = new FileInputStream(markdownFile);
+			int length = inputStream.available();
+			byte buffer[] = new byte[length];
+			inputStream.read(buffer);
+			inputStream.close();
+			content = new String(buffer, "utf-8");
+		} catch (Exception e) {
+			e.printStackTrace();// TODO log
 		}
-		return content ;
+		return content;
 	}
 
 }

@@ -19,15 +19,15 @@ import com.blog.gray.domain.ArticleDO;
  * @version: V1.0
  */
 public interface ArticleService {
-	
+
 	/**
-	 *@title: findById 
-	 *@description: 根据id查找文章信息
-	 *@param id
-	 *@return 文章实体类
+	 * @title: findById
+	 * @description: 根据id查找文章信息
+	 * @param id
+	 * @return 文章实体类
 	 */
 	public ArticleDO findById(int id);
-	
+
 	/**
 	 * @title: findAll
 	 * @description: 获取全部文章
@@ -42,5 +42,5 @@ public interface ArticleService {
 	 * @return num篇文章信息
 	 */
 	public List<ArticleDO> findNewArticles(int num) throws IndexOutOfBoundsException;
-	
+
 }

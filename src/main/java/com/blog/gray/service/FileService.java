@@ -12,12 +12,11 @@ package com.blog.gray.service;
  * @package com.example.blog.service
  * @description: 文件相关服务
  * @author: Zjh
- * @date: Sep 10, 2020 11:21:58 AM 
- * @version: V1.0   
+ * @date: Sep 10, 2020 11:21:58 AM
+ * @version: V1.0
  */
 public interface FileService {
 
-	
 	/**
 	 * @title: mdFileRead
 	 * @description: 读取markdown文件
@@ -25,5 +24,5 @@ public interface FileService {
 	 * @return String 文件内容
 	 */
 	public String mdFileRead(String path);
-	
+
 }

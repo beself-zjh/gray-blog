@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
+import com.alibaba.otter.canal.common.utils.AddressUtils;
 import com.blog.gray.config.CanalConfig;
 import com.blog.gray.factory.CanalConnectorFactory;
 
@@ -23,8 +24,8 @@ import com.blog.gray.factory.CanalConnectorFactory;
  * @package com.blog.gray.factory.impl
  * @description: canal连接器工厂方法
  * @author: Zjh
- * @date: Oct 18, 2021 4:51:39 PM 
- * @version: V1.0   
+ * @date: Oct 18, 2021 4:51:39 PM
+ * @version: V1.0
  */
 @Service
 public class CanalConnectorFactoryImpl implements CanalConnectorFactory {
@@ -34,21 +35,18 @@ public class CanalConnectorFactoryImpl implements CanalConnectorFactory {
 	 */
 	@Autowired
 	private CanalConfig canalConfig;
-	
-	/**   
+
+	/**
 	 * @title: newDefaultConnector
 	 * @description: 按照配置参数创建canal连接器
 	 * @return 默认连接器创建
-	 * @see com.blog.gray.factory.CanalConnectorFactory#newDefaultConnector()     
+	 * @see com.blog.gray.factory.CanalConnectorFactory#newDefaultConnector()
 	 */
 	@Override
 	public CanalConnector newDefaultConnector() {
 		CanalConnector connector = CanalConnectors.newSingleConnector(
-				new InetSocketAddress(canalConfig.getHost(), canalConfig.getPort()),
-				canalConfig.getDestination(), 
-				canalConfig.getUserName(), 
-				canalConfig.getPassword()
-				);
+				new InetSocketAddress(canalConfig.getHost(), canalConfig.getPort()), canalConfig.getDestination(),
+				canalConfig.getUserName(), canalConfig.getPassword());
 
 		connector.connect();
 		if (!StringUtils.hasText(canalConfig.getFilter())) {
@@ -58,7 +56,7 @@ public class CanalConnectorFactoryImpl implements CanalConnectorFactory {
 		}
 
 		connector.rollback();
-        return connector;
+		return connector;
 	}
 
 }

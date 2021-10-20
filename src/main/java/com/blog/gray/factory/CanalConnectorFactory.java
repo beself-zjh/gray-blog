@@ -14,15 +14,15 @@ import com.alibaba.otter.canal.client.CanalConnector;
  * @package com.blog.gray.factory
  * @description: canal连接器工厂方法
  * @author: Zjh
- * @date: Oct 18, 2021 4:47:15 PM 
- * @version: V1.0   
+ * @date: Oct 18, 2021 4:47:15 PM
+ * @version: V1.0
  */
 public interface CanalConnectorFactory {
 
 	/**
-	 *@title: newDefaultConnector 
-	 *@description: 按照配置文件创建canal连接器
-	 *@return 默认连接器
+	 * @title: newDefaultConnector
+	 * @description: 按照配置文件创建canal连接器
+	 * @return 默认连接器
 	 */
 	public CanalConnector newDefaultConnector();
 }

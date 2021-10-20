@@ -21,19 +21,19 @@ import com.blog.gray.util.ViewCodeUtil.ViewResultCodeEnum;
  * @package com.blog.gray.service.impl
  * @description: 文章属性相关服务
  * @author: Zjh
- * @date: Oct 16, 2021 3:39:18 PM 
- * @version: V1.0   
+ * @date: Oct 16, 2021 3:39:18 PM
+ * @version: V1.0
  */
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
 	@Autowired
 	private ArticleRepository articleRepository;
-	
-	@Autowired 
+
+	@Autowired
 	private RedisUtil redisUtil;
-	
-	/**   
+
+	/**
 	 * @title: findById
 	 * @description: 根据id查找文章信息
 	 * @param id
@@ -42,12 +42,12 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public ArticleDO findById(int id) throws RuntimeException {
 		// cache读取
-		if(redisUtil.hasKey(RedisKeyConstant.SINGLE_ARTICLE + id))
-			return (ArticleDO)redisUtil.get(RedisKeyConstant.SINGLE_ARTICLE + id);
-		
+		if (redisUtil.hasKey(RedisKeyConstant.SINGLE_ARTICLE + id))
+			return (ArticleDO) redisUtil.get(RedisKeyConstant.SINGLE_ARTICLE + id);
+
 		// 数据库读取
 		Optional<ArticleDO> articleOptional = articleRepository.findById(id);
-		if(articleOptional.isPresent()) {
+		if (articleOptional.isPresent()) {
 			ArticleDO result = articleOptional.get();
 			redisUtil.set(RedisKeyConstant.SINGLE_ARTICLE + id, result); // 放入缓存
 			return result;
@@ -65,15 +65,15 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<ArticleDO> findAll() {
 		List<ArticleDO> articleList = new ArrayList<ArticleDO>();
 		List<Integer> articleIdList = findAllId(); // 读取全部文章的id
-		
-		for(int id : articleIdList) { // 逐个读取文章属性
+
+		for (int id : articleIdList) { // 逐个读取文章属性
 			try {
 				articleList.add(findById(id));
-			} catch(Exception e) { // 跳过不存在的文章，并打印警告，此时数据库存在不一致数据
+			} catch (Exception e) { // 跳过不存在的文章，并打印警告，此时数据库存在不一致数据
 				e.printStackTrace();
 			}
 		}
-		
+
 		return articleList;
 	}
 
@@ -96,18 +96,18 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	/**
-	 *@title: findAllId 
-	 *@description: 获取全部文章的id
-	 *@return 所有文章id
+	 * @title: findAllId
+	 * @description: 获取全部文章的id
+	 * @return 所有文章id
 	 */
 	private List<Integer> findAllId() {
-		if(redisUtil.hasKey(RedisKeyConstant.ALL_ARTICLE_ID)) // cache读取
+		if (redisUtil.hasKey(RedisKeyConstant.ALL_ARTICLE_ID)) // cache读取
 			return Arrays.asList(redisUtil.lGet(RedisKeyConstant.ALL_ARTICLE_ID, 0, -1).toArray(new Integer[0]));
-		
+
 		// 数据库读取
 		List<Integer> articleIdList = articleRepository.findAllId();
 		redisUtil.lSet(RedisKeyConstant.ALL_ARTICLE_ID, articleIdList); // 放入缓存
-		
+
 		return articleIdList;
 	}
 }

@@ -12,8 +12,8 @@ package com.blog.gray.listener;
  * @package com.blog.gray.listener
  * @description: canal监听接口
  * @author: Zjh
- * @date: Oct 19, 2021 3:17:52 PM 
- * @version: V1.0   
+ * @date: Oct 19, 2021 3:17:52 PM
+ * @version: V1.0
  */
 public interface CanalListener extends Runnable {
 

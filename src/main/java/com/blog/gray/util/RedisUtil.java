@@ -115,7 +115,7 @@ public class RedisUtil {
 	 * @description: 获取list缓存的内容
 	 * @param key   键
 	 * @param start 起始下标
-	 * @param end   终止下标   0 到 -1代表所有值
+	 * @param end   终止下标 0 到 -1代表所有值
 	 * @return List<Object> list缓存的内容
 	 */
 	public List<Object> lGet(String key, long start, long end) {
@@ -127,7 +127,6 @@ public class RedisUtil {
 		}
 	}
 
-	  
 	/**
 	 * @description: 将单个对象放入缓存list
 	 * @param key   键
@@ -143,8 +142,7 @@ public class RedisUtil {
 			return false;
 		}
 	}
-	
-	 
+
 	/**
 	 * @description: 将list放入缓存
 	 * @param key   键
@@ -160,11 +158,11 @@ public class RedisUtil {
 			return false;
 		}
 	}
-	
+
 	/**
-	 *@title: clear 
-	 *@description: 请空缓存
-	 *@return 成功 或 失败
+	 * @title: clear
+	 * @description: 请空缓存
+	 * @return 成功 或 失败
 	 */
 	public boolean clear() {
 		try {
@@ -176,7 +174,6 @@ public class RedisUtil {
 			return false;
 		}
 	}
-	
 
 	/**
 	 * @param key  键

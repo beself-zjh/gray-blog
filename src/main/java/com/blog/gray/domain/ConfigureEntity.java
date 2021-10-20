@@ -9,19 +9,19 @@ import org.springframework.core.annotation.Order;
  * @package com.example.blog.domain
  * @description: Global configuration information from application.properties.
  * @author: Zjh
- * @date: Sep 6, 2020 8:37:35 PM 
- * @version: V1.0   
+ * @date: Sep 6, 2020 8:37:35 PM
+ * @version: V1.0
  */
 @Order(Ordered.HIGHEST_PRECEDENCE)
-@ConfigurationProperties(prefix="config")
+@ConfigurationProperties(prefix = "config")
 public class ConfigureEntity {
-	
-	private String name;           //config.name
-	private String profession;     //config.profession
-	private String email;          //config.email
-	private String avatarPath;     //config.avatarPath
-	private String siteCreatedTime;//config.siteCreatedTime
-	private String articleDirPath; //config.articleDirPath
+
+	private String name; // config.name
+	private String profession; // config.profession
+	private String email; // config.email
+	private String avatarPath; // config.avatarPath
+	private String siteCreatedTime;// config.siteCreatedTime
+	private String articleDirPath; // config.articleDirPath
 
 	public String getName() {
 		return name;
@@ -62,7 +62,7 @@ public class ConfigureEntity {
 	public void setSiteCreatedTime(String siteCreatedTime) {
 		this.siteCreatedTime = siteCreatedTime;
 	}
-	
+
 	public String getArticleDirPath() {
 		return articleDirPath;
 	}

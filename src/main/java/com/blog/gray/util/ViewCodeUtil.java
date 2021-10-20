@@ -12,8 +12,8 @@ package com.blog.gray.util;
  * @package com.blog.gray.util
  * @description: 异常创建工具
  * @author: Zjh
- * @date: Oct 16, 2021 3:50:44 PM 
- * @version: V1.0   
+ * @date: Oct 16, 2021 3:50:44 PM
+ * @version: V1.0
  */
 public class ViewCodeUtil {
 
@@ -23,17 +23,16 @@ public class ViewCodeUtil {
 	 * @description: 异常类型
 	 */
 	public enum ViewResultCodeEnum {
-		ARTICLE_NOT_EXIST,
-		LABEL_NOT_EXIST
+		ARTICLE_NOT_EXIST, LABEL_NOT_EXIST
 	}
-	
+
 	/**
-	 *@title: toException 
-	 *@description: 根据异常类型生成对应描述的运行时异常
-	 *@param viewResultCode 异常类型
+	 * @title: toException
+	 * @description: 根据异常类型生成对应描述的运行时异常
+	 * @param viewResultCode 异常类型
 	 */
 	public static RuntimeException toException(ViewResultCodeEnum viewResultCode) {
-		switch(viewResultCode) {
+		switch (viewResultCode) {
 		case ARTICLE_NOT_EXIST:
 			return new RuntimeException("文章不存在");
 		case LABEL_NOT_EXIST:

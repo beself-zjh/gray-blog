@@ -19,31 +19,31 @@ import com.blog.gray.service.impl.CanalClientServiceImpl;
  * @package com.blog.gray.config
  * @description: canal 客户端启动
  * @author: Zjh
- * @date: Oct 18, 2021 3:45:25 PM 
- * @version: V1.0   
+ * @date: Oct 18, 2021 3:45:25 PM
+ * @version: V1.0
  */
 public class CanalClientConfiguration {
-	
+
 	/**
 	 * @Fields canalConfig : canal配置参数
 	 */
 	@Autowired
 	private CanalConfig canalConfig;
-	
+
 	/**
 	 * @Fields canalConnectorFactory : canal连接器工厂
 	 */
-	@Autowired 
+	@Autowired
 	private CanalConnectorFactory canalConnectorFactory;
-	
+
 	/**
-	 * @title: canalClient 
+	 * @title: canalClient
 	 * @description: canal客户端自动装配&启动
 	 */
 	@Bean
 	private CanalClientService canalClient() {
-		CanalClientService canalTest = new CanalClientServiceImpl(canalConnectorFactory);
-		canalTest.start();
-		return canalTest;
+		CanalClientService canalClientService = new CanalClientServiceImpl(canalConfig, canalConnectorFactory);
+		canalClientService.start();
+		return canalClientService;
 	}
 }

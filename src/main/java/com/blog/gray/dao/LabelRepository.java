@@ -19,12 +19,12 @@ import com.blog.gray.domain.LabelDO;
  * @package com.blog.gray.dao
  * @description: 标签 数据访问对象
  * @author: Zjh
- * @date: Oct 7, 2021 2:35:46 PM 
- * @version: V1.0   
+ * @date: Oct 7, 2021 2:35:46 PM
+ * @version: V1.0
  */
-public interface LabelRepository extends JpaRepository<LabelDO, Integer>{
-	
+public interface LabelRepository extends JpaRepository<LabelDO, Integer> {
+
 	@Query(value = "select t.id from LabelDO t")
 	public List<Integer> findAllId();
-	
+
 }

@@ -28,12 +28,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @package com.blog.gray.model
  * @description: 文章 数据对象
  * @author: Zjh
- * @date: Oct 6, 2021 3:08:35 PM 
- * @version: V1.0   
+ * @date: Oct 6, 2021 3:08:35 PM
+ * @version: V1.0
  */
 @Entity
 @Table(name = "t_article")
-public class ArticleDO {	
+public class ArticleDO {
 
 	/**
 	 * @Fields id : 唯一标识，自增
@@ -41,25 +41,25 @@ public class ArticleDO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	/**
 	 * @Fields title : 标题
 	 */
 	@Column
 	public String title;
-	
+
 	/**
 	 * @Fields lastUpdateTime : 上次更新时间
 	 */
-	@Column 
+	@Column
 	private Date lastUpdateTime;
-	
+
 	/**
 	 * @Fields createdTime : 创建时间
 	 */
 	@Column
 	private Date createdTime;
-	
+
 	/**
 	 * @Fields visits : 访问量
 	 */
@@ -67,11 +67,9 @@ public class ArticleDO {
 
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "articledo_labeldo", joinColumns = @JoinColumn(name = "article_id"),
-	inverseJoinColumns = @JoinColumn(name = "label_id"))
+	@JoinTable(name = "articledo_labeldo", joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "label_id"))
 	private List<LabelDO> labels;
-	
-	
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -79,7 +77,7 @@ public class ArticleDO {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -103,7 +101,7 @@ public class ArticleDO {
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
 	}
-	
+
 	public List<LabelDO> getLabels() {
 		return labels;
 	}
@@ -119,7 +117,7 @@ public class ArticleDO {
 	public void setVisits(Long visits) {
 		this.visits = visits;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "ArticleDO{" + title + "}";
