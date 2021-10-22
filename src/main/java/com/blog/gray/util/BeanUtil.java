@@ -13,6 +13,7 @@ import java.util.Map;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 /**
  * @title: BeanUtil.java
@@ -22,6 +23,7 @@ import org.springframework.context.ApplicationContextAware;
  * @date: Oct 20, 2021 12:26:06 PM
  * @version: V1.0
  */
+@Component
 public class BeanUtil implements ApplicationContextAware {
 
 	private static ApplicationContext applicationContext;
@@ -45,7 +47,6 @@ public class BeanUtil implements ApplicationContextAware {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return map;
 	}
 

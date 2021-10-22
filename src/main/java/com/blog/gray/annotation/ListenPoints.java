@@ -32,5 +32,5 @@ import org.springframework.stereotype.Component;
 public @interface ListenPoints {
 
 	@AliasFor(annotation = Component.class)
-	String[] value() default {};
+	String value() default "";
 }

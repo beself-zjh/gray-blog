@@ -7,7 +7,6 @@
  */
 package com.blog.gray.listener.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
@@ -109,9 +108,9 @@ public class CanalListenerImpl extends AbstractCanalListener {
 		Predicate<ListenerPoint> df = p -> StringUtils.isEmpty(p.getAnno().destination())
 				|| p.getAnno().destination().equals(destination);
 		Predicate<ListenerPoint> sf = p -> p.getAnno().schema().length == 0
-				|| Arrays.stream(p.getAnno().schema()).anyMatch(s -> s == schema);
+				|| Arrays.stream(p.getAnno().schema()).anyMatch(s -> s.equals(schema));
 		Predicate<ListenerPoint> tf = p -> p.getAnno().table().length == 0
-				|| Arrays.stream(p.getAnno().table()).anyMatch(t -> t == table);
+				|| Arrays.stream(p.getAnno().table()).anyMatch(t -> t.equals(table));
 		Predicate<ListenerPoint> ef = p -> p.getAnno().eventType().length == 0 
 				|| Arrays.stream(p.getAnno().eventType()).anyMatch(e -> e == eventType);
 		

@@ -2,7 +2,7 @@
  * projectName: gray-blog 
  * fileName: UpdateListenPoint.java 
  * packageName: com.blog.gray.annotation 
- * date: Oct 20, 202112:06:26 PM 
+ * date: Oct 22, 20212:42:37 PM 
  * copyright(c) 2017-2020 xxx公司
  */
 package com.blog.gray.annotation;
@@ -21,23 +21,35 @@ import com.alibaba.otter.canal.protocol.CanalEntry;
 @Documented
 @Retention(RUNTIME)
 @Target(METHOD)
-@ListenPoint(eventType = CanalEntry.EventType.UPDATE)
+@ListenPoint(eventType = {CanalEntry.EventType.UPDATE})
 /**
  * @title: UpdateListenPoint.java
  * @package com.blog.gray.annotation
- * @description: 更新事件监听点注解
+ * @description: TODO
  * @author: Zjh
- * @date: Oct 20, 2021 12:06:26 PM
- * @version: V1.0
+ * @date: Oct 22, 2021 2:42:37 PM 
+ * @version: V1.0   
  */
 public @interface UpdateListenPoint {
 
+	/**
+	 *@title: destination 
+	 *@description: canal destination
+	 */
 	@AliasFor(annotation = ListenPoint.class)
 	String destination() default "";
 	
+	/**
+	 *@title: schema 
+	 *@description: schema 模式（数据库）
+	 */
 	@AliasFor(annotation = ListenPoint.class)
 	String[] schema() default {};
 	
+	/**
+	 *@title: table 
+	 *@description: 表
+	 */
 	@AliasFor(annotation = ListenPoint.class)
 	String[] table() default {};
 	

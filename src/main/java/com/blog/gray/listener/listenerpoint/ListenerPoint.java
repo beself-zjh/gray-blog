@@ -8,8 +8,6 @@
 package com.blog.gray.listener.listenerpoint;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.blog.gray.annotation.ListenPoint;
 
@@ -23,10 +21,19 @@ import com.blog.gray.annotation.ListenPoint;
  */
 public class ListenerPoint {
 	
+	/**
+	 * @Fields target : 监听点所在bean对象
+	 */
 	private Object target;
 	
+	/**
+	 * @Fields method : 监听点方法
+	 */
 	private Method method;
 	
+	/**
+	 * @Fields anno : 监听点注解类型
+	 */
 	private ListenPoint anno;
 	
 	public ListenerPoint(Object target, Method method, ListenPoint anno) {

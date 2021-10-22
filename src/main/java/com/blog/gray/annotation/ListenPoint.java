@@ -16,9 +16,9 @@ import java.lang.annotation.Target;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Documented
 @Retention(RUNTIME)
-@Target({ ElementType.TYPE, ElementType.METHOD })
 /**
  * @title: ListenPoint.java
  * @package com.blog.gray.annotation
@@ -29,10 +29,22 @@ import com.alibaba.otter.canal.protocol.CanalEntry;
  */
 public @interface ListenPoint {
 
+	/**
+	 *@title: destination 
+	 *@description: canal destination
+	 */
 	String destination() default "";
 	
+	/**
+	 *@title: schema 
+	 *@description: schema 模式（数据库）
+	 */
 	String[] schema() default {};
 	
+	/**
+	 *@title: table 
+	 *@description: 表
+	 */
 	String[] table() default {};
 	
 	/**

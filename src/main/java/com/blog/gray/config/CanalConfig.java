@@ -61,7 +61,7 @@ public class CanalConfig {
 	/**
 	 * @Fields acquireInterval : 监听间隔
 	 */
-	private int acquireInterval;
+	private long acquireInterval;
 
 	/**
 	 * @Fields batchSize : 单次提取日志数量
@@ -124,11 +124,11 @@ public class CanalConfig {
 		this.retryCount = retryCount;
 	}
 
-	public int getAcquireInterval() {
+	public long getAcquireInterval() {
 		return acquireInterval;
 	}
 
-	public void setAcquireInterval(int acquireInterval) {
+	public void setAcquireInterval(long acquireInterval) {
 		this.acquireInterval = acquireInterval;
 	}
 

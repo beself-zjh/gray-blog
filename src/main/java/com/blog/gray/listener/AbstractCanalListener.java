@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.protocol.Message;
-import com.alibaba.otter.canal.protocol.exception.CanalClientException;
 import com.blog.gray.config.CanalConfig;
 import com.blog.gray.listener.listenerpoint.ListenerPoint;
 

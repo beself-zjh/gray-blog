@@ -16,8 +16,7 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.core.annotation.AnnotatedElementUtils;
 
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.blog.gray.annotation.ListenPoint;
@@ -96,7 +95,9 @@ public class CanalClientServiceImpl extends AbstractCanalClientService {
 				Method[] methods = target.getClass().getDeclaredMethods();
 				if (methods != null && methods.length > 0) {
 					for (Method method : methods) {
-						ListenPoint anno = AnnotationUtils.findAnnotation(method, ListenPoint.class);
+						//ListenPoint anno = AnnotationUtils.findAnnotation(method, ListenPoint.class);
+						ListenPoint anno = AnnotatedElementUtils.findMergedAnnotation(method, ListenPoint.class);
+						// AnnotatedElementUtils.findMergedAnnotation
 						if (anno != null) {
 							annoListenerPoints.add(new ListenerPoint(target, method, anno));
 						}
