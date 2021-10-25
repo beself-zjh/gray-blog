@@ -64,7 +64,24 @@ public class RedisUtil {
 			}
 		}
 	}
+	
+	/**
+	 * @title: clear
+	 * @description: 请空缓存
+	 * @return 成功 或 失败
+	 */
+	public boolean clear() {
+		try {
+			Set<String> keys = redisTemplate.keys("*");
+			redisTemplate.delete(keys);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
+	/***************Object*****************/
 	/**
 	 * @description: 缓存获取
 	 * @param key 键
@@ -111,6 +128,7 @@ public class RedisUtil {
 		}
 	}
 
+	/***************List*****************/
 	/**
 	 * @description: 获取list缓存的内容
 	 * @param key   键
@@ -159,21 +177,28 @@ public class RedisUtil {
 		}
 	}
 
+	/***************HyperLogLog*****************/
 	/**
-	 * @title: clear
-	 * @description: 请空缓存
-	 * @return 成功 或 失败
+	 *@title: hllSet 
+	 *@description: 多个value计入hll
+	 *@param key
+	 *@param values
+	 *@return 所有value都已存在返回0，否则1
 	 */
-	public boolean clear() {
-		try {
-			Set<String> keys = redisTemplate.keys("*");
-			redisTemplate.delete(keys);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+	public Long hllSet(String key, Object... values) {
+		return redisTemplate.opsForHyperLogLog().add(key, values);
 	}
+	
+	/**
+	 *@title: hllSize 
+	 *@description: 统计多个key中的基数和
+	 *@param keys
+	 *@return 所有key的基数和
+	 */
+	public Long hllSize(String... keys) {
+		return redisTemplate.opsForHyperLogLog().size(keys);
+	}
+
 
 	/**
 	 * @param key  键

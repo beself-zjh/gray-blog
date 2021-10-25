@@ -8,7 +8,6 @@
 package com.blog.gray.service.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +17,6 @@ import org.springframework.stereotype.Service;
 import com.blog.gray.dao.LabelRepository;
 import com.blog.gray.domain.LabelDO;
 import com.blog.gray.service.LabelService;
-import com.blog.gray.service.RedisKeyConstant;
-import com.blog.gray.util.RedisUtil;
 import com.blog.gray.util.ViewCodeUtil;
 import com.blog.gray.util.ViewCodeUtil.ViewResultCodeEnum;
 
@@ -35,9 +32,6 @@ import com.blog.gray.util.ViewCodeUtil.ViewResultCodeEnum;
 public class LabelServiceImpl implements LabelService {
 
 	@Autowired
-	private RedisUtil redisUtil;
-
-	@Autowired
 	private LabelRepository labelRepository;
 
 	/**
@@ -48,16 +42,10 @@ public class LabelServiceImpl implements LabelService {
 	 */
 	@Override
 	public LabelDO findById(int id) throws RuntimeException {
-		// cache读取
-		if (redisUtil.hasKey(RedisKeyConstant.SINGLE_LABEL + id))
-			return (LabelDO) redisUtil.get(RedisKeyConstant.SINGLE_LABEL + id);
-
-		// 数据库读取
+		// redis + 数据库读取
 		Optional<LabelDO> labelOptional = labelRepository.findById(id);
 		if (labelOptional.isPresent()) {
-			LabelDO result = labelOptional.get();
-			redisUtil.set(RedisKeyConstant.SINGLE_LABEL + id, result); // 放入缓存
-			return result;
+			return labelOptional.get();
 		} else { // 若数据库中不存在，抛出标签不存在异常
 			throw ViewCodeUtil.toException(ViewResultCodeEnum.LABEL_NOT_EXIST);
 		}
@@ -90,12 +78,8 @@ public class LabelServiceImpl implements LabelService {
 	 * @return 所有标签id
 	 */
 	private List<Integer> findAllId() {
-		if (redisUtil.hasKey(RedisKeyConstant.ALL_LABEL_ID)) // cache读取
-			return Arrays.asList(redisUtil.lGet(RedisKeyConstant.ALL_LABEL_ID, 0, -1).toArray(new Integer[0]));
-
-		// 数据库读取
+		// redis + 数据库读取
 		List<Integer> labelIdList = labelRepository.findAllId();
-		redisUtil.lSet(RedisKeyConstant.ALL_LABEL_ID, labelIdList); // 放入缓存
 
 		return labelIdList;
 	}

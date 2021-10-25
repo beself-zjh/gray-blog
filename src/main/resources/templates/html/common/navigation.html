@@ -67,7 +67,7 @@
 		<div class="menu-articles_labels">
 		<div th:each="article : ${navigationViewModel.newArticles}" class="menu-article_label">
 			<img src="img/icon_article.png"></img>
-			<a	th:href="'/article?filename=' + ${article.title}"
+			<a	th:href="'/article?id=' + ${article.id}"
 				th:text="${article.title}"></a>
 		</div>
 		</div>
@@ -82,7 +82,7 @@
 		<div id="menu_labels" class="menu-articles_labels">
 		<div th:each="label : ${navigationViewModel.labels}" class="menu-article_label">
 			<img src="img/icon_tag.png"></img>
-			<a  th:href="'/catalog?label=' + ${label}"
+			<a  th:href="'/catalog?label=' + ${label.id}"
 				th:text="${label.label}"></a>
 		</div>
 		</div>

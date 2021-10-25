@@ -1,8 +1,8 @@
 /** 
  * projectName: gray-blog 
- * fileName: ArticleServiceTest.java 
+ * fileName: LabelServiceTest.java 
  * packageName: com.blog.gray.service 
- * date: Oct 17, 20213:59:41 PM 
+ * date: Oct 25, 20216:13:15 PM 
  * copyright(c) 2017-2020 xxx公司
  */
 package com.blog.gray.service;
@@ -17,27 +17,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.blog.gray.domain.ArticleDO;
+import com.blog.gray.domain.LabelDO;
 import com.blog.gray.util.RedisUtil;
 
 /**
- * @title: ArticleServiceTest.java
+ * @title: LabelServiceTest.java
  * @package com.blog.gray.service
  * @description: TODO
  * @author: Zjh
- * @date: Oct 17, 2021 3:59:41 PM 
+ * @date: Oct 25, 2021 6:13:15 PM 
  * @version: V1.0   
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ArticleServiceTest {
-
+public class LabelServiceTest {
+	
 	@Autowired
 	private RedisUtil redisUtil;
 	
 	@Autowired
-	private ArticleService articleService;
-
+	private LabelService labelService;
+	
 	@Before
 	public void before() {
 		redisUtil.clear();
@@ -45,19 +45,20 @@ public class ArticleServiceTest {
 	
 	@Test
 	public void findByIdTest() {
-		ArticleDO article1 = articleService.findById(5);
-		Assert.assertEquals(true, redisUtil.hasKey(RedisKeyConstant.SINGLE_ARTICLE + 5));
+		LabelDO label1 = labelService.findById(1);
+		Assert.assertSame(true, redisUtil.hasKey(RedisKeyConstant.SINGLE_LABEL + 1));
 		
-		ArticleDO article2 = articleService.findById(5);
-		Assert.assertEquals(article1.getId(), article2.getId());
+		LabelDO label2 = labelService.findById(1);
+		Assert.assertEquals(label1.getLabel(), label2.getLabel());
 	}
 	
 	@Test
 	public void findAllTest() {
-		List<ArticleDO> articles = articleService.findAll();
-		Assert.assertSame(true, redisUtil.hasKey(RedisKeyConstant.ALL_ARTICLE_ID));
-		for(ArticleDO article : articles) {
-			Assert.assertSame(true, redisUtil.hasKey(RedisKeyConstant.SINGLE_ARTICLE + article.getId()));
+		List<LabelDO> labels = labelService.findAll();
+		Assert.assertSame(true, redisUtil.hasKey(RedisKeyConstant.ALL_LABEL_ID));
+		for (LabelDO label : labels) {
+			Assert.assertSame(true, redisUtil.hasKey(RedisKeyConstant.SINGLE_LABEL + label.getId()));
 		}
 	}
+
 }

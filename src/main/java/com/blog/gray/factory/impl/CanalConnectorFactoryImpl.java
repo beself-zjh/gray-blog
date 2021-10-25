@@ -15,7 +15,6 @@ import org.springframework.util.StringUtils;
 
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
-import com.alibaba.otter.canal.common.utils.AddressUtils;
 import com.blog.gray.config.CanalConfig;
 import com.blog.gray.factory.CanalConnectorFactory;
 

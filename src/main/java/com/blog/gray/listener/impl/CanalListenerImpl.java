@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.StringUtils;
 
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.protocol.CanalEntry;
@@ -105,7 +105,7 @@ public class CanalListenerImpl extends AbstractCanalListener {
 	
 	protected Predicate<ListenerPoint> getFilter(String destination,
 			String schema, String table, CanalEntry.EventType eventType) {
-		Predicate<ListenerPoint> df = p -> StringUtils.isEmpty(p.getAnno().destination())
+		Predicate<ListenerPoint> df = p -> StringUtils.hasText(p.getAnno().destination())
 				|| p.getAnno().destination().equals(destination);
 		Predicate<ListenerPoint> sf = p -> p.getAnno().schema().length == 0
 				|| Arrays.stream(p.getAnno().schema()).anyMatch(s -> s.equals(schema));

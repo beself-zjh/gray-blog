@@ -64,7 +64,7 @@ public class ArticleListenerPointsTest {
 		articleDO.title = "Test Article";
 		articleDO = articleRepository.save(articleDO);
 		try {
-			Thread.sleep(2 * canalConfig.getAcquireInterval());
+			Thread.sleep(3 * canalConfig.getAcquireInterval());
 		} catch (InterruptedException e) {
 			
 		}
@@ -82,7 +82,7 @@ public class ArticleListenerPointsTest {
 		// 2. 插入一个文章，缓存all_article_id消失
 		sample = articleRepository.save(sample);
 		try {
-			Thread.sleep(2 * canalConfig.getAcquireInterval());
+			Thread.sleep(3 * canalConfig.getAcquireInterval());
 		} catch (InterruptedException e) {
 			
 		}
@@ -93,7 +93,7 @@ public class ArticleListenerPointsTest {
 		// 4. 删除一篇文章，缓存all_article_id消失
 		articleRepository.deleteById(sample.getId());
 		try {
-			Thread.sleep(2 * canalConfig.getAcquireInterval());
+			Thread.sleep(3 * canalConfig.getAcquireInterval());
 		} catch (InterruptedException e) {
 			
 		}

@@ -1,7 +1,6 @@
 package com.blog.gray.service.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Service;
 import com.blog.gray.dao.ArticleRepository;
 import com.blog.gray.domain.ArticleDO;
 import com.blog.gray.service.ArticleService;
-import com.blog.gray.service.RedisKeyConstant;
-import com.blog.gray.util.RedisUtil;
 import com.blog.gray.util.ViewCodeUtil;
 import com.blog.gray.util.ViewCodeUtil.ViewResultCodeEnum;
 
@@ -30,10 +27,8 @@ public class ArticleServiceImpl implements ArticleService {
 	@Autowired
 	private ArticleRepository articleRepository;
 
-	@Autowired
-	private RedisUtil redisUtil;
-
 	/**
+	 * Note ：务必处理文章不存在异常
 	 * @title: findById
 	 * @description: 根据id查找文章信息
 	 * @param id
@@ -41,16 +36,10 @@ public class ArticleServiceImpl implements ArticleService {
 	 */
 	@Override
 	public ArticleDO findById(int id) throws RuntimeException {
-		// cache读取
-		if (redisUtil.hasKey(RedisKeyConstant.SINGLE_ARTICLE + id))
-			return (ArticleDO) redisUtil.get(RedisKeyConstant.SINGLE_ARTICLE + id);
-
-		// 数据库读取
+		// redis + mysql读取
 		Optional<ArticleDO> articleOptional = articleRepository.findById(id);
 		if (articleOptional.isPresent()) {
-			ArticleDO result = articleOptional.get();
-			redisUtil.set(RedisKeyConstant.SINGLE_ARTICLE + id, result); // 放入缓存
-			return result;
+			return articleOptional.get();
 		} else { // 若数据库中不存在，抛出文章不存在异常
 			throw ViewCodeUtil.toException(ViewResultCodeEnum.ARTICLE_NOT_EXIST);
 		}
@@ -88,7 +77,7 @@ public class ArticleServiceImpl implements ArticleService {
 		int n = Math.abs(num); // 防止num为负数
 
 		// 获取全部根据日期排序
-		List<ArticleDO> allArticleInfo = this.findAll();
+		List<ArticleDO> allArticleInfo = findAll();
 		allArticleInfo
 				.sort((ArticleDO item1, ArticleDO item2) -> item1.getCreatedTime().compareTo(item2.getCreatedTime()));
 
@@ -101,12 +90,8 @@ public class ArticleServiceImpl implements ArticleService {
 	 * @return 所有文章id
 	 */
 	private List<Integer> findAllId() {
-		if (redisUtil.hasKey(RedisKeyConstant.ALL_ARTICLE_ID)) // cache读取
-			return Arrays.asList(redisUtil.lGet(RedisKeyConstant.ALL_ARTICLE_ID, 0, -1).toArray(new Integer[0]));
-
-		// 数据库读取
+		// redis + mysql读取
 		List<Integer> articleIdList = articleRepository.findAllId();
-		redisUtil.lSet(RedisKeyConstant.ALL_ARTICLE_ID, articleIdList); // 放入缓存
 
 		return articleIdList;
 	}
