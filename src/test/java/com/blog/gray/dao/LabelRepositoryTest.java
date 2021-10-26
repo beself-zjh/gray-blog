@@ -21,7 +21,7 @@ import com.blog.gray.domain.LabelDO;
 /**
  * @title: LabelRepositoryTest.java
  * @package com.blog.gray.dao
- * @description: TODO
+ * @description: test  {@link com.blog.gray.dao.LabelRepository}
  * @author: Zjh
  * @date: Oct 17, 2021 3:28:06 PM 
  * @version: V1.0   

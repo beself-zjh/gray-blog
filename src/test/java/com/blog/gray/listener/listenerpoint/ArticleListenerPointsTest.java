@@ -26,7 +26,7 @@ import com.blog.gray.util.RedisUtil;
 /**
  * @title: ArticleListenerPoints.java
  * @package com.blog.gray.listener.listenerpoint
- * @description: TODO
+ * @description: 测试ArticleListenerPoints
  * @author: Zjh
  * @date: Oct 22, 2021 3:33:26 PM 
  * @version: V1.0   
@@ -84,7 +84,7 @@ public class ArticleListenerPointsTest {
 		try {
 			Thread.sleep(3 * canalConfig.getAcquireInterval());
 		} catch (InterruptedException e) {
-			
+			e.printStackTrace();
 		}
 		Assert.assertSame(false, redisUtil.hasKey(RedisKeyConstant.ALL_ARTICLE_ID));
 		// 3. 再次缓存all_article_id
@@ -95,7 +95,7 @@ public class ArticleListenerPointsTest {
 		try {
 			Thread.sleep(3 * canalConfig.getAcquireInterval());
 		} catch (InterruptedException e) {
-			
+			e.printStackTrace();
 		}
 		Assert.assertSame(false, redisUtil.hasKey(RedisKeyConstant.ALL_LABEL_ID));
 	}

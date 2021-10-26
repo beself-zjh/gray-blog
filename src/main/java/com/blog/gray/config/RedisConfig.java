@@ -66,7 +66,8 @@ public class RedisConfig extends CachingConfigurerSupport {
 
 		return template;
 	}
-
+	
+	/*************无用代码****************/
 	/**
 	 * @description: 对hash类型的数据操作
 	 * @param redisTemplate

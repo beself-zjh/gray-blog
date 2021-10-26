@@ -28,7 +28,6 @@ import com.blog.gray.util.RedisUtil;
  * @date: Oct 25, 2021 9:10:21 PM 
  * @version: V1.0   
  */
-// TODO 定时器待单测， 另增加访问量显示任务  cur + deta
 @Component
 public class RedisScheduler {
 
@@ -57,7 +56,7 @@ public class RedisScheduler {
 				article.setVisits(article.getVisits() + today);
 				
 				articleRepository.save(article);
-				redisUtil.del(key);
+				redisUtil.del(key); // 此处删除缓存内文章当日pv，不应该交给更新监听做这个任务，更新文章其他属性不应影响当日pv
 			}
 		});
 	}

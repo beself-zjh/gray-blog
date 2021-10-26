@@ -105,7 +105,7 @@ public class CanalListenerImpl extends AbstractCanalListener {
 	
 	protected Predicate<ListenerPoint> getFilter(String destination,
 			String schema, String table, CanalEntry.EventType eventType) {
-		Predicate<ListenerPoint> df = p -> StringUtils.hasText(p.getAnno().destination())
+		Predicate<ListenerPoint> df = p -> !StringUtils.hasText(p.getAnno().destination())
 				|| p.getAnno().destination().equals(destination);
 		Predicate<ListenerPoint> sf = p -> p.getAnno().schema().length == 0
 				|| Arrays.stream(p.getAnno().schema()).anyMatch(s -> s.equals(schema));
