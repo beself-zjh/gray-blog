@@ -49,12 +49,6 @@ public class ArticleDO {
 	public String title;
 
 	/**
-	 * @Fields lastUpdateTime : 上次更新时间
-	 */
-	@Column
-	private Date lastUpdateTime;
-
-	/**
 	 * @Fields createdTime : 创建时间
 	 */
 	@Column
@@ -65,8 +59,13 @@ public class ArticleDO {
 	 */
 	private Long visits = 0L;
 	
-	//private String summary;
-	//private String imgPath;
+	/**
+	 * @Fields summary : 文章摘要
+	 */
+	private String summary;
+	
+	//private String imgName;
+	//private List<Comment> comments;
 
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -87,14 +86,6 @@ public class ArticleDO {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public Date getLastUpdateTime() {
-		return lastUpdateTime;
-	}
-
-	public void setLastUpdateTime(Date lastUpdateTime) {
-		this.lastUpdateTime = lastUpdateTime;
 	}
 
 	public Date getCreatedTime() {
@@ -121,6 +112,14 @@ public class ArticleDO {
 		this.visits = visits;
 	}
 
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+	
 	@Override
 	public String toString() {
 		return "ArticleDO{" + title + "}";

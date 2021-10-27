@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="utf-8">
 		<!--设置移动端的自由缩放 -->
@@ -55,14 +55,14 @@
 						
 						
 						<!-- 中间博客内容 -->
-						<div class="ui attached  segment">
+						<div th:each="article : ${navigationViewModel.newArticles}" class="ui attached  segment">
 						<!-- 第一篇 -->
 							<div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
 								<div class="ui mobile reversed stackable grid">
 									<!-- 内容分页的十一份 -->
 									<div class="eleven wide column">
-										<h3 class="ui header m-text-thin m-text-spaced">spring boot 实战开发教程一</h3>
-										<p class="m-text-thin m-text-spaced">做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?</p>
+										<h3 class="ui header m-text-thin m-text-spaced"><a th:href="'/blog?id=' + ${article.id}" th:text="${article.title}"></a></h3>
+										<p class="m-text-thin m-text-spaced" th:text="${article.summary}"></p>
 										<div class="ui stackable grid">
 											<div class="eleven wide column">
 												<div class="ui mini horizontal link list">
@@ -71,10 +71,10 @@
 														<div class="content"><a href="#" class="header">科技毒瘤君</a></div>
 													</div>
 													<div class="item">
-														<i class="calendar icon"></i>2020-02-22
+														<i class="calendar icon"></i><i th:text="${article.createdTime}"></i>
 													</div>
 													<div class="item">
-														<i class="eye icon"></i>666
+														<i class="eye icon"></i><i th:text="${article.visits}"></i>
 													</div>
 												</div>
 											</div>
@@ -92,258 +92,6 @@
 									</div>
 								</div>
 							</div>
-						<!-- 第二篇 -->
-							<div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-								<div class="ui mobile reversed stackable grid">
-									<!-- 内容分页的十一份 -->
-									<div class="eleven wide column">
-										<h3 class="ui header m-text-thin m-text-spaced">spring boot 实战开发教程一</h3>
-										<p class="m-text-thin m-text-spaced">做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?</p>
-										<div class="ui stackable grid">
-											<div class="eleven wide column">
-												<div class="ui mini horizontal link list">
-													<div class="item">
-														<img src="https://i.picsum.photos/id/1005/100/100.jpg" alt="" class="ui avatar image">
-														<div class="content"><a href="#" class="header">科技毒瘤君</a></div>
-													</div>
-													<div class="item">
-														<i class="calendar icon"></i>2020-02-22
-													</div>
-													<div class="item">
-														<i class="eye icon"></i>666
-													</div>
-												</div>
-											</div>
-											<div class="right aligned five wide column">
-												<a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin ">认知升级</a>
-											</div>
-										</div>
-									</div>
-									
-									<!-- 内容分页的五份 -->
-									<div class="five wide column">
-										<a href="#" target="_blank">
-											<img src="https://i.picsum.photos/id/1005/800/450.jpg" alt="" class="ui rounded image">
-										</a>
-									</div>
-								</div>
-							</div>
-						<!-- 第三篇 -->
-							<div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-								<div class="ui mobile reversed stackable grid">
-									<!-- 内容分页的十一份 -->
-									<div class="eleven wide column">
-										<h3 class="ui header m-text-thin m-text-spaced">spring boot 实战开发教程一</h3>
-										<p class="m-text-thin m-text-spaced">做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?</p>
-										<div class="ui stackable grid">
-											<div class="eleven wide column">
-												<div class="ui mini horizontal link list">
-													<div class="item">
-														<img src="https://i.picsum.photos/id/1005/100/100.jpg" alt="" class="ui avatar image">
-														<div class="content"><a href="#" class="header">科技毒瘤君</a></div>
-													</div>
-													<div class="item">
-														<i class="calendar icon"></i>2020-02-22
-													</div>
-													<div class="item">
-														<i class="eye icon"></i>666
-													</div>
-												</div>
-											</div>
-											<div class="right aligned five wide column">
-												<a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin ">认知升级</a>
-											</div>
-										</div>
-									</div>
-									
-									<!-- 内容分页的五份 -->
-									<div class="five wide column">
-										<a href="#" target="_blank">
-											<img src="https://i.picsum.photos/id/1005/800/450.jpg" alt="" class="ui rounded image">
-										</a>
-									</div>
-								</div>
-							</div>
-						<!-- 第四篇 -->
-							<div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-								<div class="ui mobile reversed stackable grid">
-									<!-- 内容分页的十一份 -->
-									<div class="eleven wide column">
-										<h3 class="ui header m-text-thin m-text-spaced">spring boot 实战开发教程一</h3>
-										<p class="m-text-thin m-text-spaced">做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?</p>
-										<div class="ui stackable grid">
-											<div class="eleven wide column">
-												<div class="ui mini horizontal link list">
-													<div class="item">
-														<img src="https://i.picsum.photos/id/1005/100/100.jpg" alt="" class="ui avatar image">
-														<div class="content"><a href="#" class="header">科技毒瘤君</a></div>
-													</div>
-													<div class="item">
-														<i class="calendar icon"></i>2020-02-22
-													</div>
-													<div class="item">
-														<i class="eye icon"></i>666
-													</div>
-												</div>
-											</div>
-											<div class="right aligned five wide column">
-												<a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin ">认知升级</a>
-											</div>
-										</div>
-									</div>
-									
-									<!-- 内容分页的五份 -->
-									<div class="five wide column">
-										<a href="#" target="_blank">
-											<img src="https://i.picsum.photos/id/1005/800/450.jpg" alt="" class="ui rounded image">
-										</a>
-									</div>
-								</div>
-							</div>
-						<!-- 第五篇 -->
-							<div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-								<div class="ui mobile reversed stackable grid">
-									<!-- 内容分页的十一份 -->
-									<div class="eleven wide column">
-										<h3 class="ui header m-text-thin m-text-spaced">spring boot 实战开发教程一</h3>
-										<p class="m-text-thin m-text-spaced">做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?</p>
-										<div class="ui stackable grid">
-											<div class="eleven wide column">
-												<div class="ui mini horizontal link list">
-													<div class="item">
-														<img src="https://i.picsum.photos/id/1005/100/100.jpg" alt="" class="ui avatar image">
-														<div class="content"><a href="#" class="header">科技毒瘤君</a></div>
-													</div>
-													<div class="item">
-														<i class="calendar icon"></i>2020-02-22
-													</div>
-													<div class="item">
-														<i class="eye icon"></i>666
-													</div>
-												</div>
-											</div>
-											<div class="right aligned five wide column">
-												<a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin ">认知升级</a>
-											</div>
-										</div>
-									</div>
-									
-									<!-- 内容分页的五份 -->
-									<div class="five wide column">
-										<a href="#" target="_blank">
-											<img src="https://i.picsum.photos/id/1005/800/450.jpg" alt="" class="ui rounded image">
-										</a>
-									</div>
-								</div>
-							</div>
-						<!-- 第六篇 -->
-							<div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-							<div class="ui mobile reversed stackable grid">
-								<!-- 内容分页的十一份 -->
-								<div class="eleven wide column">
-									<h3 class="ui header m-text-thin m-text-spaced">spring boot 实战开发教程一</h3>
-									<p class="m-text-thin m-text-spaced">做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?</p>
-									<div class="ui stackable grid">
-										<div class="eleven wide column">
-											<div class="ui mini horizontal link list">
-												<div class="item">
-													<img src="https://i.picsum.photos/id/1005/100/100.jpg" alt="" class="ui avatar image">
-													<div class="content"><a href="#" class="header">科技毒瘤君</a></div>
-												</div>
-												<div class="item">
-													<i class="calendar icon"></i>2020-02-22
-												</div>
-												<div class="item">
-													<i class="eye icon"></i>666
-												</div>
-											</div>
-										</div>
-										<div class="right aligned five wide column">
-											<a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin ">认知升级</a>
-										</div>
-									</div>
-								</div>
-								
-								<!-- 内容分页的五份 -->
-								<div class="five wide column">
-									<a href="#" target="_blank">
-										<img src="https://i.picsum.photos/id/1005/800/450.jpg" alt="" class="ui rounded image">
-									</a>
-								</div>
-							</div>
-						</div>
-						<!-- 第七篇 -->
-							<div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-							<div class="ui mobile reversed stackable grid">
-								<!-- 内容分页的十一份 -->
-								<div class="eleven wide column">
-									<h3 class="ui header m-text-thin m-text-spaced">spring boot 实战开发教程一</h3>
-									<p class="m-text-thin m-text-spaced">做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?</p>
-									<div class="ui stackable grid">
-										<div class="eleven wide column">
-											<div class="ui mini horizontal link list">
-												<div class="item">
-													<img src="https://i.picsum.photos/id/1005/100/100.jpg" alt="" class="ui avatar image">
-													<div class="content"><a href="#" class="header">科技毒瘤君</a></div>
-												</div>
-												<div class="item">
-													<i class="calendar icon"></i>2020-02-22
-												</div>
-												<div class="item">
-													<i class="eye icon"></i>666
-												</div>
-											</div>
-										</div>
-										<div class="right aligned five wide column">
-											<a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin ">认知升级</a>
-										</div>
-									</div>
-								</div>
-								
-								<!-- 内容分页的五份 -->
-								<div class="five wide column">
-									<a href="#" target="_blank">
-										<img src="https://i.picsum.photos/id/1005/800/450.jpg" alt="" class="ui rounded image">
-									</a>
-								</div>
-							</div>
-						</div>
-						<!-- 第八篇 -->
-							<div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
-							<div class="ui mobile reversed stackable grid">
-								<!-- 内容分页的十一份 -->
-								<div class="eleven wide column">
-									<h3 class="ui header m-text-thin m-text-spaced">spring boot 实战开发教程一</h3>
-									<p class="m-text-thin m-text-spaced">做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?做内容站点到底做什么好呢?</p>
-									<div class="ui stackable grid">
-										<div class="eleven wide column">
-											<div class="ui mini horizontal link list">
-												<div class="item">
-													<img src="https://i.picsum.photos/id/1005/100/100.jpg" alt="" class="ui avatar image">
-													<div class="content"><a href="#" class="header">科技毒瘤君</a></div>
-												</div>
-												<div class="item">
-													<i class="calendar icon"></i>2020-02-22
-												</div>
-												<div class="item">
-													<i class="eye icon"></i>666
-												</div>
-											</div>
-										</div>
-										<div class="right aligned five wide column">
-											<a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin ">认知升级</a>
-										</div>
-									</div>
-								</div>
-								
-								<!-- 内容分页的五份 -->
-								<div class="five wide column">
-									<a href="#" target="_blank">
-										<img src="https://i.picsum.photos/id/1005/800/450.jpg" alt="" class="ui rounded image">
-									</a>
-								</div>
-							</div>
-						</div>
 						</div>
 						
 						<!-- 底部翻页 -->

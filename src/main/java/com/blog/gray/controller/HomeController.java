@@ -39,7 +39,8 @@ public class HomeController {
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String homeHandler(Model model) {
-
+		model.addAttribute("navigationViewModel", navigationViewModel.flush());
+		
 		return "html/home";
 	}
 
@@ -49,7 +50,7 @@ public class HomeController {
 		model.addAttribute("navigationViewModel", navigationViewModel.flush());
 		model.addAttribute("articleViewModel", articleViewModel.flush("14771972"));
 
-		return "html/article";
+		return "html/blog";
 	}
 	
 	@RequestMapping(path = "/tags", method = RequestMethod.GET)
