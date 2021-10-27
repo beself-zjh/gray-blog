@@ -30,7 +30,7 @@ public class ArticleViewModel {
 	 */
 	private String markdown;
 
-	private Long visits;
+	private String visits;
 
 	@Autowired
 	private ConfigureEntity configureEntity;
@@ -45,8 +45,18 @@ public class ArticleViewModel {
 		String path = configureEntity.getArticleDirPath() + "\\" + filename + ".md";
 		String markdownText = fileService.mdFileRead(path);
 		setMarkdown(markdownUtil.markdownToHtml(markdownText));
+		
+		setVisits("10");
 
 		return this;
+	}
+
+	public String getVisits() {
+		return visits;
+	}
+
+	public void setVisits(String visits) {
+		this.visits = visits;
 	}
 
 	public String getMarkdown() {

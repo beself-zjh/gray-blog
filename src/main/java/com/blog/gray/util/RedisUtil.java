@@ -167,6 +167,7 @@ public class RedisUtil {
 	 * @param value 值
 	 * @return true/false 成功/失败
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public boolean lSet(String key, List value) {
 		try {
 			redisTemplate.opsForList().rightPushAll(key, value);

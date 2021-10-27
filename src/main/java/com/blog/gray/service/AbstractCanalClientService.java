@@ -9,6 +9,7 @@ package com.blog.gray.service;
 
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.blog.gray.factory.CanalConnectorFactory;
+import com.blog.gray.factory.CanalListenerFactory;
 
 /**
  * @title: AbstractCanalClientService.java
@@ -24,9 +25,16 @@ public abstract class AbstractCanalClientService implements CanalClientService {
 	 * @Fields canalConnectorFactory : canal连接器工厂
 	 */
 	protected final CanalConnectorFactory canalConnectorFactory;
+	
+	/**
+	 * @Fields canalListenerFactory : canal监听器工厂
+	 */
+	protected final CanalListenerFactory canalListenerFactory;
 
-	public AbstractCanalClientService(CanalConnectorFactory canalConnectorFactory) {
+	public AbstractCanalClientService(CanalConnectorFactory canalConnectorFactory,
+			CanalListenerFactory canalListenerFactory) {
 		this.canalConnectorFactory = canalConnectorFactory;
+		this.canalListenerFactory = canalListenerFactory;
 	}
 
 	/**

@@ -37,7 +37,6 @@ import com.blog.gray.util.RedisUtil;
 @SpringBootTest
 public class PageViewAspectTest {
 	
-	//@Autowired
 	private MockMvc mock;
 	
 	@Autowired
@@ -60,6 +59,7 @@ public class PageViewAspectTest {
 	@Test
 	public void pageViewRecordTest() {
 		Integer articleId = 1;
+		// 1. 模拟一次文章访问
 		try {
 			mock.perform(MockMvcRequestBuilders
 					.get("/article").param("id", articleId.toString()))
@@ -68,6 +68,7 @@ public class PageViewAspectTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		// 2. 检查缓存中访问量
 		Assert.assertSame(true, redisUtil.hasKey(RedisKeyConstant.SINGLE_ARTICLE_PV + articleId));
 		Assert.assertEquals(Long.valueOf(1L), redisUtil.hllSize(RedisKeyConstant.SINGLE_ARTICLE_PV + articleId));
 	}

@@ -39,18 +39,52 @@ public class HomeController {
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String homeHandler(Model model) {
-		model.addAttribute("navigationViewModel", navigationViewModel.flush());
 
-		return "html/index";
+		return "html/home";
 	}
 
 	@PageView
-	@RequestMapping(path = "/article", method = RequestMethod.GET)
+	@RequestMapping(path = "/blog", method = RequestMethod.GET)
 	public String articleHandler(HttpServletRequest request, @RequestParam Integer id, Model model) {
 		model.addAttribute("navigationViewModel", navigationViewModel.flush());
 		model.addAttribute("articleViewModel", articleViewModel.flush("14771972"));
 
 		return "html/article";
 	}
+	
+	@RequestMapping(path = "/tags", method = RequestMethod.GET)
+	public String tagsHandler(Model model) {
 
+		return "html/tags";
+	}
+	
+	@RequestMapping(path = "/types", method = RequestMethod.GET)
+	public String typesHandler(Model model) {
+
+		return "html/types";
+	}
+	
+	@RequestMapping(path = "/archives", method = RequestMethod.GET)
+	public String archivesHandler(Model model) {
+
+		return "html/archives";
+	}
+	
+	@RequestMapping(path = "/aboutMe", method = RequestMethod.GET)
+	public String aboutMeHandler(Model model) {
+
+		return "html/aboutMe";
+	}
+	
+	@RequestMapping(path = "/admin", method = RequestMethod.GET)
+	public String adminHandler(Model model) {
+
+		return "html/admin/blogs";
+	}
+	
+	@RequestMapping(path = "/edit", method = RequestMethod.GET)
+	public String editHandler(Model model) {
+
+		return "html/admin/blogs_input";
+	}
 }

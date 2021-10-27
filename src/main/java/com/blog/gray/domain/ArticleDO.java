@@ -64,6 +64,9 @@ public class ArticleDO {
 	 * @Fields visits : 访问量
 	 */
 	private Long visits = 0L;
+	
+	//private String summary;
+	//private String imgPath;
 
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)

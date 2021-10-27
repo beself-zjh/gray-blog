@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
 import com.blog.gray.factory.CanalConnectorFactory;
+import com.blog.gray.factory.CanalListenerFactory;
 import com.blog.gray.service.CanalClientService;
 import com.blog.gray.service.impl.CanalClientServiceImpl;
 
@@ -35,6 +36,12 @@ public class CanalClientConfiguration {
 	 */
 	@Autowired
 	private CanalConnectorFactory canalConnectorFactory;
+	
+	/**
+	 * @Fields canalListenerFactory : canal监听器工厂
+	 */
+	@Autowired
+	private CanalListenerFactory canalListenerFactory;
 
 	/**
 	 * @title: canalClient
@@ -42,7 +49,7 @@ public class CanalClientConfiguration {
 	 */
 	@Bean
 	private CanalClientService canalClient() {
-		CanalClientService canalClientService = new CanalClientServiceImpl(canalConfig, canalConnectorFactory);
+		CanalClientService canalClientService = new CanalClientServiceImpl(canalConfig, canalConnectorFactory, canalListenerFactory);
 		canalClientService.start();
 		return canalClientService;
 	}

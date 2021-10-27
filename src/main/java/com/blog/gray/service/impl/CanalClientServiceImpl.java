@@ -23,7 +23,7 @@ import com.blog.gray.annotation.ListenPoint;
 import com.blog.gray.annotation.ListenPoints;
 import com.blog.gray.config.CanalConfig;
 import com.blog.gray.factory.CanalConnectorFactory;
-import com.blog.gray.listener.impl.CanalListenerImpl;
+import com.blog.gray.factory.CanalListenerFactory;
 import com.blog.gray.listener.listenerpoint.ListenerPoint;
 import com.blog.gray.service.AbstractCanalClientService;
 import com.blog.gray.util.BeanUtil;
@@ -53,8 +53,9 @@ public class CanalClientServiceImpl extends AbstractCanalClientService {
 	 */
 	private final List<ListenerPoint> annoListenerPoints = new ArrayList<>();
 
-	public CanalClientServiceImpl(CanalConfig canalConfig, CanalConnectorFactory canalConnectorFactory) {
-		super(canalConnectorFactory);
+	public CanalClientServiceImpl(CanalConfig canalConfig, CanalConnectorFactory canalConnectorFactory,
+			CanalListenerFactory canalListenerFactory) {
+		super(canalConnectorFactory, canalListenerFactory);
 		this.canalConfig = canalConfig;
 		executor = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue<>(),
 				Executors.defaultThreadFactory());
@@ -79,8 +80,8 @@ public class CanalClientServiceImpl extends AbstractCanalClientService {
 	 */
 	@Override
 	protected void process(CanalConnector connector) {
-		executor.submit(new CanalListenerImpl(canalConfig, connector, annoListenerPoints)); // TODO 工厂创建
-		//executor.submit(new CanalTest());
+		executor.submit(canalListenerFactory
+				.newDefaultCanalListener(canalConfig, connector, annoListenerPoints));
 	}
 
 	/**
@@ -97,7 +98,6 @@ public class CanalClientServiceImpl extends AbstractCanalClientService {
 					for (Method method : methods) {
 						//ListenPoint anno = AnnotationUtils.findAnnotation(method, ListenPoint.class);
 						ListenPoint anno = AnnotatedElementUtils.findMergedAnnotation(method, ListenPoint.class);
-						// AnnotatedElementUtils.findMergedAnnotation
 						if (anno != null) {
 							annoListenerPoints.add(new ListenerPoint(target, method, anno));
 						}
