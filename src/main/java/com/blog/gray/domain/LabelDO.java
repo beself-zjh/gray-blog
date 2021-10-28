@@ -44,6 +44,12 @@ public class LabelDO {
 	 */
 	@Column(unique = true)
 	private String label;
+	
+	/**
+	 * @Fields count : 文章数量
+	 */
+	@Column
+	private Integer count;
 
 	/**
 	 * @Fields articleId : 关联文章
@@ -66,6 +72,14 @@ public class LabelDO {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+	
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 
 	@Override

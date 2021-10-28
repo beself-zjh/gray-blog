@@ -2,15 +2,18 @@ package com.blog.gray;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.blog.gray.annotation.EnableCanalClient;
+import com.blog.gray.config.WebConfig;
 
 @SpringBootApplication
 @EnableCanalClient
 @EnableScheduling
 @EnableAsync
+@EnableConfigurationProperties(WebConfig.class)
 public class GrayBlogApplication {
 
 	public static void main(String[] args) {

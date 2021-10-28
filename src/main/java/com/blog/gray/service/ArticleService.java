@@ -42,5 +42,20 @@ public interface ArticleService {
 	 * @return num篇文章信息
 	 */
 	public List<ArticleDO> findNewArticles(int num) throws IndexOutOfBoundsException;
+	
+	/**
+	 *@title: findArticles 
+	 *@description: 查找下标从s到t的文章
+	 *@param from 起始下标
+	 *@param to 终止下标
+	 */
+	public List<ArticleDO> findDateSortedArticles(int from, int to);
+	
+	/**
+	 *@title: size 
+	 *@description: 统计文章总数量
+	 *@return 文章数量
+	 */
+	public Integer size();
 
 }

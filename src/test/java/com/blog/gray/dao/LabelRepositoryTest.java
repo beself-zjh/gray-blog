@@ -47,4 +47,11 @@ public class LabelRepositoryTest {
 			for(int i = 0; i < labelList.size(); ++i)
 				Assert.assertEquals(labelList.get(i).getId(), labelIdList.get(i));
 	}
+	
+	@Test
+	public void findByArticlesId() {
+		for (LabelDO label : labelRepository.findByArticles_id(7)) {
+			System.out.println(label.getLabel());
+		}
+	}
 }

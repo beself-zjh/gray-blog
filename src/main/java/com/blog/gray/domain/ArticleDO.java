@@ -7,7 +7,7 @@
  */
 package com.blog.gray.domain;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -57,11 +57,13 @@ public class ArticleDO {
 	/**
 	 * @Fields visits : 访问量
 	 */
+	@Column
 	private Long visits = 0L;
 	
 	/**
 	 * @Fields summary : 文章摘要
 	 */
+	@Column
 	private String summary;
 	
 	//private String imgName;

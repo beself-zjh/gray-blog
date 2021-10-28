@@ -13,7 +13,7 @@ import org.springframework.core.annotation.Order;
  * @version: V1.0
  */
 @Order(Ordered.HIGHEST_PRECEDENCE)
-@ConfigurationProperties(prefix = "config")
+@ConfigurationProperties(prefix = "pconfig")
 public class ConfigureEntity {
 
 	private String name; // config.name

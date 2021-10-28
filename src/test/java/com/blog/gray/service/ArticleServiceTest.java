@@ -45,10 +45,10 @@ public class ArticleServiceTest {
 	
 	@Test
 	public void findByIdTest() {
-		ArticleDO article1 = articleService.findById(5);
-		Assert.assertEquals(true, redisUtil.hasKey(RedisKeyConstant.SINGLE_ARTICLE + 5));
+		ArticleDO article1 = articleService.findById(1);
+		Assert.assertEquals(true, redisUtil.hasKey(RedisKeyConstant.SINGLE_ARTICLE + 1));
 		
-		ArticleDO article2 = articleService.findById(5);
+		ArticleDO article2 = articleService.findById(1);
 		Assert.assertEquals(article1.getId(), article2.getId());
 	}
 	

@@ -1,6 +1,7 @@
 package com.blog.gray.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.blog.gray.dao.ArticleRepository;
+import com.blog.gray.dao.LabelRepository;
 import com.blog.gray.domain.ArticleDO;
 import com.blog.gray.service.ArticleService;
 import com.blog.gray.util.ViewCodeUtil;
@@ -26,6 +28,9 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Autowired
 	private ArticleRepository articleRepository;
+	
+	@Autowired
+	private LabelRepository labelRepository;
 
 	/**
 	 * Note ：务必处理文章不存在异常
@@ -39,7 +44,9 @@ public class ArticleServiceImpl implements ArticleService {
 		// redis + mysql读取
 		Optional<ArticleDO> articleOptional = articleRepository.findById(id);
 		if (articleOptional.isPresent()) {
-			return articleOptional.get();
+			ArticleDO article = articleOptional.get();
+			article.setLabels(labelRepository.findByArticles_id(article.getId()));
+			return article;
 		} else { // 若数据库中不存在，抛出文章不存在异常
 			throw ViewCodeUtil.toException(ViewResultCodeEnum.ARTICLE_NOT_EXIST);
 		}
@@ -74,16 +81,45 @@ public class ArticleServiceImpl implements ArticleService {
 	 */
 	@Override
 	public List<ArticleDO> findNewArticles(int num) {
-		int n = Math.abs(num); // 防止num为负数
+		int from = size() - num;
+		int to = from + num;
+		List<ArticleDO> newArticles = findDateSortedArticles(from, to);
+		Collections.reverse(newArticles);
+		return newArticles;
+	}
+	
+	/**
+	 *@title: findArticles 
+	 *@description: 查找下标从s到t的文章
+	 *@param from 起始下标
+	 *@param to 终止下标
+	 */
+	@Override
+	public List<ArticleDO> findDateSortedArticles(int from, int to) {
+		int start = from < 0 ? 0 : from;
+		int end = to <= 0 ? 1 : to;
 
-		// 获取全部根据日期排序
-		List<ArticleDO> allArticleInfo = findAll();
-		allArticleInfo
-				.sort((ArticleDO item1, ArticleDO item2) -> item1.getCreatedTime().compareTo(item2.getCreatedTime()));
+		List<ArticleDO> allArticles = findAll();
+		int maxIndex = allArticles.size() - 1;
 
-		return allArticleInfo.subList(0, n <= allArticleInfo.size() ? n : allArticleInfo.size());
+		if (maxIndex >= 0) {
+			allArticles.sort((ArticleDO item1, ArticleDO item2) 
+					-> item1.getCreatedTime().compareTo(item2.getCreatedTime()));
+			return allArticles.subList(Math.min(start, maxIndex), Math.min(end, maxIndex + 1));
+		}
+		return allArticles;
 	}
 
+	/**
+	 *@title: size 
+	 *@description: 统计文章总数量
+	 *@return 文章数量
+	 */
+	@Override
+	public Integer size() {
+		return findAllId().size();
+	}
+	
 	/**
 	 * @title: findAllId
 	 * @description: 获取全部文章的id

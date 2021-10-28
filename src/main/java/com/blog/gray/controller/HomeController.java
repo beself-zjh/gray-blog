@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.blog.gray.annotation.PageView;
+import com.blog.gray.factory.ViewModelFactory;
 import com.blog.gray.viewmodel.ArticleViewModel;
+import com.blog.gray.viewmodel.FooterViewModel;
 import com.blog.gray.viewmodel.NavigationViewModel;
 
 /**
@@ -36,10 +38,18 @@ public class HomeController {
 
 	@Autowired
 	private ArticleViewModel articleViewModel;
+	
+	@Autowired
+	private FooterViewModel footerViewModel;
+	
+	@Autowired
+	private ViewModelFactory viewModelFactory;
 
-	@RequestMapping(path = "/", method = RequestMethod.GET)
-	public String homeHandler(Model model) {
-		model.addAttribute("navigationViewModel", navigationViewModel.flush());
+	@RequestMapping(path = "/home", method = RequestMethod.GET)
+	public String homeHandler(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page, 
+							  Model model) {
+		model.addAttribute("footerViewModel", footerViewModel);
+		model.addAttribute("homeViewModel", viewModelFactory.createHomeViewModel(page));
 		
 		return "html/home";
 	}
@@ -54,8 +64,12 @@ public class HomeController {
 	}
 	
 	@RequestMapping(path = "/tags", method = RequestMethod.GET)
-	public String tagsHandler(Model model) {
-
+	public String tagsHandler(@RequestParam(value = "id", required = false, defaultValue = "-1") Integer id,
+							  @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+							  Model model) {
+		model.addAttribute("footerViewModel", footerViewModel);
+		model.addAttribute("tagsViewModel", viewModelFactory.createTagsViewModel(id, page));
+		
 		return "html/tags";
 	}
 	
