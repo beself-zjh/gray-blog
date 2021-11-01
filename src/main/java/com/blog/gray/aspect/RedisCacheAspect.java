@@ -61,6 +61,14 @@ public class RedisCacheAspect {
 				e.printStackTrace();
 			}
 		}
+		
+		if (result.isPresent()) {
+			ArticleDO article = result.get();
+			Long deta = 0L;
+			if (redisUtil.hasKey(RedisKeyConstant.SINGLE_ARTICLE_PV + article.getId()))
+				deta = redisUtil.hllSize(RedisKeyConstant.SINGLE_ARTICLE_PV + article.getId());
+			article.setVisits(article.getVisits() + deta);
+		}
 		return result;
 	}
 	
@@ -133,6 +141,31 @@ public class RedisCacheAspect {
 			}
 		}
 		
+		return result;
+	}
+	
+	/**
+	 *@title: findByLabelsAroundAdvice 
+	 *@description: 按标签id查找文章时，根据缓存临时访问量，更新文章总访问量
+	 *@param proceedingJoinPoint 切点 ArticleRepository.findById
+	 */
+	@SuppressWarnings("unchecked")
+	@Around("execution(* com.blog.gray.dao.ArticleRepository.findByLabels_id(..))")
+	public Object findByLabelsAroundAdvice(ProceedingJoinPoint proceedingJoinPoint) {
+
+		List<ArticleDO> result = new ArrayList<>();
+		try {
+			result = (List<ArticleDO>) proceedingJoinPoint.proceed();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	
+		for (ArticleDO article : result) {
+			Long deta = 0L;
+			if (redisUtil.hasKey(RedisKeyConstant.SINGLE_ARTICLE_PV + article.getId()))
+				deta = redisUtil.hllSize(RedisKeyConstant.SINGLE_ARTICLE_PV + article.getId());
+			article.setVisits(article.getVisits() + deta);
+		}
 		return result;
 	}
 

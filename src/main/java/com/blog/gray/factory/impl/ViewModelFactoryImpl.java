@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
 import com.blog.gray.config.WebConfig;
 import com.blog.gray.factory.ViewModelFactory;
 import com.blog.gray.service.ArticleService;
+import com.blog.gray.service.FileService;
 import com.blog.gray.service.LabelService;
+import com.blog.gray.util.MarkdownUtil;
+import com.blog.gray.viewmodel.BlogViewModel;
 import com.blog.gray.viewmodel.HomeViewModel;
 import com.blog.gray.viewmodel.TagsViewModel;
 
@@ -35,6 +38,12 @@ public class ViewModelFactoryImpl implements ViewModelFactory {
 	private LabelService labelService;
 
 	@Autowired
+	private FileService fileService;
+
+	@Autowired
+	private MarkdownUtil markdownUtil;
+
+	@Autowired
 	private WebConfig webConfig;
 	
 	/**   
@@ -53,8 +62,8 @@ public class ViewModelFactoryImpl implements ViewModelFactory {
 	}
 	
 	/**   
-	 * @title: createHomeViewModel
-	 * @description: 创建HomeViewModel
+	 * @title: createTagsViewModel
+	 * @description: 创建TagsViewModel
 	 * @param id 标签
 	 * @param page 页码
 	 * @return   
@@ -66,6 +75,21 @@ public class ViewModelFactoryImpl implements ViewModelFactory {
 		tagsViewModel.init();
 		
 		return tagsViewModel;
+	}
+
+	/**   
+	 * @title: createBlogViewModel
+	 * @description: 创建BlogViewModel
+	 * @param id 文章id
+	 * @return   
+	 * @see com.blog.gray.factory.ViewModelFactory#createBlogViewModel(java.lang.Integer)     
+	 */
+	@Override
+	public BlogViewModel createBlogViewModel(Integer id) {
+		BlogViewModel blogViewModel = new BlogViewModel(articleService, webConfig, fileService, markdownUtil, id);			
+		blogViewModel.init();
+		
+		return blogViewModel;
 	}
 
 }

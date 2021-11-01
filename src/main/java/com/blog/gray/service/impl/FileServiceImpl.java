@@ -39,7 +39,7 @@ public class FileServiceImpl implements FileService {
 		try {
 			File markdownFile = new File(path);
 			if (!markdownFile.exists()) {
-				return null;
+				return content;
 			}
 			FileInputStream inputStream = new FileInputStream(markdownFile);
 			int length = inputStream.available();

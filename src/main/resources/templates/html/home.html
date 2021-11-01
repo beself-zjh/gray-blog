@@ -10,29 +10,7 @@
 	</head>
 	<body>
 		<!--导航 -->
-		<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
-			<div class="ui container">
-				<div class="ui inverted secondary stackable menu">
-					<a href="/index">
-						<h2 class="ui teal header item" th:text="${homeViewModel.webConfig.webName}"></h2>
-					</a>
-					<a href="/home" class="active m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
-					<!-- <a href="/types" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a> -->
-					<a href="/tags" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
-					<a href="/archives" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
-					<a href="/aboutMe" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
-					<div class="right m-item item m-mobile-hide">
-						<div class="ui icon inverted transparent input">
-							<input type="text" placeholder="搜索...">
-							<i class="search link icon"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-			<a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
-				<i class="sidebar icon"></i>
-			</a>
-		</nav>
+		<div th:replace="html/common/header :: header"></div>
 
 		<!-- 中间内容-->
 		<div class="m-container m-padded-tb-big">
@@ -67,7 +45,7 @@
 											<div class="eleven wide column">
 												<div class="ui mini horizontal link list">
 													<div class="item">
-														<img th:src="${homeViewModel.webConfig.avatarPath}" alt="" class="ui avatar image">
+														<img src="img/avatar.png" alt="" class="ui avatar image">
 														<div class="content"><a href="/aboutMe" class="header" th:text="${homeViewModel.webConfig.name}"></a></div>
 													</div>
 													<div class="item">
@@ -87,7 +65,7 @@
 									<!-- 内容分页的五份 -->
 									<div class="five wide column">
 										<a href="#">
-											<img src="https://i.picsum.photos/id/1005/800/450.jpg" alt="" class="ui rounded image">
+											<img src="" alt="" class="ui rounded image">
 										</a>
 									</div>
 								</div>
@@ -123,7 +101,7 @@
 									</div>
 								</div>
 								<div class="ui teal segment">
-									<a th:each="label : ${homeViewModel.labels}" th:href="'/tag?id=' + ${label.id}" class="ui teal basic left pointing label m-margin-tb-tiny">
+									<a th:each="label : ${homeViewModel.labels}" th:href="'/tags?id=' + ${label.id}" class="ui teal basic left pointing label m-margin-tb-tiny">
 										<i th:text="${label.label}"></i>
 										<i class="detail" th:text="${label.count}"></i>
 									</a>
@@ -142,7 +120,7 @@
 						<!-- 二维码 -->
 						<h5 class="ui horizontal divider hearder m-margin-top-large">扫描关注我</h5>
 						<div class="ui centered card" style="width: 11em">
-							<img src="img/wechat.jpg" alt="微信公众号二维码" class="ui runded image">
+							<img src="img/wechat.jpg" alt="微信二维码" class="ui runded image">
 						</div>
 					</div>
 				</div>
@@ -160,6 +138,8 @@
 			$('.menu.toggle').click(function(){
 				$('.m-item').toggleClass('m-mobile-hide');
 			});
+			
+			$("#home").addClass("active");
 		</script>
 	</body>
 </html>

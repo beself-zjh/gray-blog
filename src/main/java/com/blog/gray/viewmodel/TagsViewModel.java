@@ -55,7 +55,9 @@ public class TagsViewModel {
 		if (labelId == -1 && labels.size() > 0)
 			labelId = labels.get(0).getId();
 		
-		articles = articleService.findAll();
+		int from = (page - 1) * webConfig.getBlogNumPerPage();
+		int to = from + webConfig.getBlogNumPerPage();
+		articles = articleService.findDateSortedArticlesByLabel(labelId, from, to);
 	}
 	
 	public WebConfig getWebConfig() {

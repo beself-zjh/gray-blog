@@ -68,6 +68,9 @@ public class ArticleDO {
 	
 	//private String imgName;
 	//private List<Comment> comments;
+	
+	@Column
+	private String type = "原创";
 
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -121,6 +124,15 @@ public class ArticleDO {
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	
 	@Override
 	public String toString() {

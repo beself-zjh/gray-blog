@@ -90,6 +90,20 @@ public class ArticleServiceImpl implements ArticleService {
 	
 	/**
 	 *@title: findArticles 
+	 *@description: 查找所有文章，并按日期排序
+	 */
+	@Override
+	public List<ArticleDO> findDateSortedAllArticles() {
+		List<ArticleDO> allArticles = findAll();
+		
+		allArticles.sort((ArticleDO item1, ArticleDO item2) 
+				-> item1.getCreatedTime().compareTo(item2.getCreatedTime()));
+		
+		return allArticles;
+	}
+	
+	/**
+	 *@title: findArticles 
 	 *@description: 查找下标从s到t的文章
 	 *@param from 起始下标
 	 *@param to 终止下标
@@ -99,12 +113,10 @@ public class ArticleServiceImpl implements ArticleService {
 		int start = from < 0 ? 0 : from;
 		int end = to <= 0 ? 1 : to;
 
-		List<ArticleDO> allArticles = findAll();
+		List<ArticleDO> allArticles = findDateSortedAllArticles();
 		int maxIndex = allArticles.size() - 1;
 
 		if (maxIndex >= 0) {
-			allArticles.sort((ArticleDO item1, ArticleDO item2) 
-					-> item1.getCreatedTime().compareTo(item2.getCreatedTime()));
 			return allArticles.subList(Math.min(start, maxIndex), Math.min(end, maxIndex + 1));
 		}
 		return allArticles;
@@ -120,6 +132,41 @@ public class ArticleServiceImpl implements ArticleService {
 		return findAllId().size();
 	}
 	
+	/**   
+	 * @title: findDateSortedArticlesByLabel
+	 * @description: 根据标签查找文章
+	 * @param labelId
+	 * @return   
+	 * @see com.blog.gray.service.ArticleService#findDateSortedArticlesByLabel(int)     
+	 */
+	@Override
+	public List<ArticleDO> findDateSortedArticlesByLabel(int labelId) {
+		return articleRepository.findByLabels_id(labelId); //TODO 读取缓存中的访问量
+	}
+
+	/**   
+	 * @title: findDateSortedArticlesByLabel
+	 * @description: 根据标签查找文章子序列
+	 * @param labelId
+	 * @param from 起始下标
+	 * @param to 终止下标
+	 * @return   
+	 * @see com.blog.gray.service.ArticleService#findDateSortedArticlesByLabel(int, int, int)     
+	 */
+	@Override
+	public List<ArticleDO> findDateSortedArticlesByLabel(int labelId, int from, int to) {
+		List<ArticleDO> articles = findDateSortedArticlesByLabel(labelId);
+		int start = from < 0 ? 0 : from;
+		int end = to <= 0 ? 1 : to;
+		int maxIndex = articles.size() - 1;
+		if (maxIndex >= 0) {
+			articles.sort((ArticleDO item1, ArticleDO item2) 
+					-> item1.getCreatedTime().compareTo(item2.getCreatedTime()));
+			return articles.subList(Math.min(start, maxIndex), Math.min(end, maxIndex + 1));
+		}
+		return articles;
+	}
+	
 	/**
 	 * @title: findAllId
 	 * @description: 获取全部文章的id
@@ -131,4 +178,5 @@ public class ArticleServiceImpl implements ArticleService {
 
 		return articleIdList;
 	}
+
 }

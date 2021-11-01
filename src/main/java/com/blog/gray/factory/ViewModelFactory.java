@@ -7,6 +7,7 @@
  */
 package com.blog.gray.factory;
 
+import com.blog.gray.viewmodel.BlogViewModel;
 import com.blog.gray.viewmodel.HomeViewModel;
 import com.blog.gray.viewmodel.TagsViewModel;
 
@@ -28,10 +29,17 @@ public interface ViewModelFactory {
 	public HomeViewModel createHomeViewModel(Integer page);
 	
 	/**
-	 *@title: createHomeViewModel 
+	 *@title: createTagsViewModel 
 	 *@description: 创建TagsViewModel
 	 *@param id 标签
 	 *@param page 页码 
 	 */
 	public TagsViewModel createTagsViewModel(Integer id, Integer page);
+	
+	/**
+	 *@title: createBlogViewModel 
+	 *@description: 创建BlogViewModel
+	 *@param id 文章id
+	 */
+	public BlogViewModel createBlogViewModel(Integer id);
 }

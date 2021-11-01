@@ -19,6 +19,7 @@ import com.blog.gray.annotation.ListenPoints;
 import com.blog.gray.annotation.UpdateListenPoint;
 import com.blog.gray.service.RedisKeyConstant;
 import com.blog.gray.util.RedisUtil;
+import com.blog.gray.viewmodel.ArchivesViewModel;
 
 /**
  * @title: ListenerPoints.java
@@ -34,6 +35,9 @@ public class ArticleListenerPoints {
 	@Autowired
 	private RedisUtil redisUtil;
 	
+	@Autowired
+	private ArchivesViewModel archivesViewModel;
+	
 	@UpdateListenPoint(table = {"t_article"})
 	public void updateArticleEvent(RowData rowData) {
 		List<Column> columns = rowData.getAfterColumnsList();
@@ -43,6 +47,7 @@ public class ArticleListenerPoints {
 				break;
 			}
 		}
+		archivesViewModel.setFlag(true);
 	}
 	
 	@InsertListenPoint(table = {"t_article"})

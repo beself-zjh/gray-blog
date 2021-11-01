@@ -45,11 +45,34 @@ public interface ArticleService {
 	
 	/**
 	 *@title: findArticles 
+	 *@description: 查找所有文章，并按日期排序
+	 */
+	public List<ArticleDO> findDateSortedAllArticles();
+	
+	/**
+	 *@title: findArticles 
 	 *@description: 查找下标从s到t的文章
 	 *@param from 起始下标
 	 *@param to 终止下标
 	 */
 	public List<ArticleDO> findDateSortedArticles(int from, int to);
+
+	/**
+	 *@title: findDateSortedArticlesByLabel 
+	 *@description: 根据标签查找文章
+	 *@param labelId
+	 */
+	public List<ArticleDO> findDateSortedArticlesByLabel(int labelId);
+	
+	
+	/**
+	 *@title: findDateSortedArticlesByLabel 
+	 *@description: 根据标签查找文章子序列
+	 *@param labelId
+	 *@param from 起始下标
+	 *@param to 终止下标
+	 */
+	public List<ArticleDO> findDateSortedArticlesByLabel(int labelId, int from, int to);
 	
 	/**
 	 *@title: size 

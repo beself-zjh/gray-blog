@@ -27,4 +27,5 @@ public interface ArticleRepository extends JpaRepository<ArticleDO, Integer> {
 	@Query(value = "select t.id from ArticleDO t")
 	public List<Integer> findAllId();
 
+	public List<ArticleDO> findByLabels_id(Integer id);
 }

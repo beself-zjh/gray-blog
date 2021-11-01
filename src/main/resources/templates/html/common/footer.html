@@ -16,10 +16,10 @@
 			<!-- 最新博客-->
 			<div class="three wide column">
 				<div class="ui inverted link list">
-					<h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
-					<a href="#" class="item">用户故事（User story）</a> <a href="#"
-						class="item">用户故事（User story）</a> <a href="#" class="item">用户故事（User
-						story）</a>
+					<h4 class="ui inverted header m-text-thin m-text-spaced">广告位</h4>
+<!-- 					<a href="#" class="item">用户故事（User story）</a> 
+					<a href="#"	class="item">用户故事（User story）</a> 
+					<a href="#" class="item">用户故事（User story）</a> -->
 				</div>
 			</div>
 			<!-- 联系我-->
@@ -29,7 +29,7 @@
 					<a href="#" class="item"
 						th:text="'QQ：' + ${footerViewModel.webConfig.qq}"></a> <a href="#"
 						class="item"
-						th:text="'微信公众号：' + ${footerViewModel.webConfig.weChat}"></a> <a
+						th:text="'WeChat：' + ${footerViewModel.webConfig.weChat}"></a> <a
 						href="#" class="item"
 						th:text="'Email：' + ${footerViewModel.webConfig.email}"></a>
 				</div>
@@ -50,6 +50,13 @@
 				src="" style="float: left;" />
 				<p  style="float: left; height: 20px; line-height: 20px; margin: 0px 0px 0px 5px; color: #939393;"
 					th:text="${footerViewModel.webConfig.province} + '公网安备' + ${footerViewModel.webConfig.code} + '号'"></p>
+			</a>
+			<a target="_blank"
+				href="https://beian.miit.gov.cn/"
+				style="display: inline-block; text-decoration: none; height: 20px; line-height: 20px;"><img
+				src="" style="float: left;" />
+				<p  style="float: left; height: 20px; line-height: 20px; margin: 0px 0px 0px 5px; color: #939393;"
+					th:text="${footerViewModel.webConfig.province} + 'ICP备' + ${footerViewModel.webConfig.icp} + '号'"></p>
 			</a>
 		</div>
 		<p class="m-text-thin m-text-spaced m-opactiy-tiny"

@@ -7,20 +7,29 @@
  */
 package com.blog.gray.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.blog.gray.annotation.PageView;
+import com.blog.gray.domain.RawBlogDO;
 import com.blog.gray.factory.ViewModelFactory;
-import com.blog.gray.viewmodel.ArticleViewModel;
+import com.blog.gray.viewmodel.AboutMeViewModel;
+import com.blog.gray.viewmodel.ArchivesViewModel;
 import com.blog.gray.viewmodel.FooterViewModel;
-import com.blog.gray.viewmodel.NavigationViewModel;
+import com.blog.gray.viewmodel.HeaderViewModel;
 
 /**
  * @title: HomeController.java
@@ -32,15 +41,18 @@ import com.blog.gray.viewmodel.NavigationViewModel;
  */
 @Controller
 public class HomeController {
-
+	
 	@Autowired
-	private NavigationViewModel navigationViewModel;
-
-	@Autowired
-	private ArticleViewModel articleViewModel;
+	private HeaderViewModel headerViewModel;
 	
 	@Autowired
 	private FooterViewModel footerViewModel;
+	
+	@Autowired
+	private AboutMeViewModel aboutMeViewModel;
+	
+	@Autowired
+	private ArchivesViewModel archivesViewModel;
 	
 	@Autowired
 	private ViewModelFactory viewModelFactory;
@@ -48,6 +60,7 @@ public class HomeController {
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public String homeHandler(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page, 
 							  Model model) {
+		model.addAttribute("headerViewModel", headerViewModel);
 		model.addAttribute("footerViewModel", footerViewModel);
 		model.addAttribute("homeViewModel", viewModelFactory.createHomeViewModel(page));
 		
@@ -56,9 +69,12 @@ public class HomeController {
 
 	@PageView
 	@RequestMapping(path = "/blog", method = RequestMethod.GET)
-	public String articleHandler(HttpServletRequest request, @RequestParam Integer id, Model model) {
-		model.addAttribute("navigationViewModel", navigationViewModel.flush());
-		model.addAttribute("articleViewModel", articleViewModel.flush("14771972"));
+	public String articleHandler(HttpServletRequest request, 
+								 @RequestParam(value = "id", required = false, defaultValue = "-1") Integer id,
+								 Model model) {
+		model.addAttribute("headerViewModel", headerViewModel);
+		model.addAttribute("footerViewModel", footerViewModel);
+		model.addAttribute("blogViewModel", viewModelFactory.createBlogViewModel(id));
 
 		return "html/blog";
 	}
@@ -67,39 +83,86 @@ public class HomeController {
 	public String tagsHandler(@RequestParam(value = "id", required = false, defaultValue = "-1") Integer id,
 							  @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
 							  Model model) {
+		model.addAttribute("headerViewModel", headerViewModel);
 		model.addAttribute("footerViewModel", footerViewModel);
 		model.addAttribute("tagsViewModel", viewModelFactory.createTagsViewModel(id, page));
 		
 		return "html/tags";
 	}
 	
-	@RequestMapping(path = "/types", method = RequestMethod.GET)
-	public String typesHandler(Model model) {
-
-		return "html/types";
-	}
-	
 	@RequestMapping(path = "/archives", method = RequestMethod.GET)
 	public String archivesHandler(Model model) {
-
+		model.addAttribute("headerViewModel", headerViewModel);
+		model.addAttribute("footerViewModel", footerViewModel);
+		model.addAttribute("archivesViewModel", archivesViewModel.init());
+		
 		return "html/archives";
 	}
 	
 	@RequestMapping(path = "/aboutMe", method = RequestMethod.GET)
 	public String aboutMeHandler(Model model) {
-
+		model.addAttribute("headerViewModel", headerViewModel);
+		model.addAttribute("footerViewModel", footerViewModel);
+		model.addAttribute("aboutMeViewModel", aboutMeViewModel);
+		
 		return "html/aboutMe";
 	}
 	
-	@RequestMapping(path = "/admin", method = RequestMethod.GET)
-	public String adminHandler(Model model) {
+	@RequestMapping(path = "/manage", method = RequestMethod.GET)
+	public String adminManageHandler(Model model) {
 
-		return "html/admin/blogs";
+		return "html/admin/admin";
 	}
 	
 	@RequestMapping(path = "/edit", method = RequestMethod.GET)
-	public String editHandler(Model model) {
-
-		return "html/admin/blogs_input";
+	public String adminEditHandler(Model model) {
+		model.addAttribute("headerViewModel", headerViewModel);
+		model.addAttribute("footerViewModel", footerViewModel);
+		
+		return "html/admin/edit";
 	}
+	
+	@RequestMapping(path = "/admin/upload/image", method = RequestMethod.POST)
+	public void uploadImageHandler(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "editormd-image-file", required = true) MultipartFile attach) {
+		try {
+	        request.setCharacterEncoding( "utf-8" );
+	        response.setHeader( "Content-Type" , "text/html" );
+	        String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
+	        
+	        // 文件路径不存在则需要创建文件路径
+	        File filePath=new File(rootPath);
+	        if(!filePath.exists()){
+	            filePath.mkdirs();
+	        }
+
+	        // 最终文件名
+	        File realFile=new File(rootPath + File.separator + attach.getOriginalFilename());
+	        FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
+
+	        System.out.println(rootPath + File.separator + attach.getOriginalFilename());
+	        // 下面response返回的json格式是editor.md所限制的，规范输出就OK
+	        response.getWriter().write( "{\"success\": 1, \"message\":\"successfully upload\",\"url\":\"/resources/upload/" + attach.getOriginalFilename() + "\"}" );
+	    } catch (Exception e) {
+	        try {
+	            response.getWriter().write( "{\"success\":0}" );
+	        } catch (IOException e1) {
+	            e1.printStackTrace();
+	        }
+	    }
+	}
+	
+	@RequestMapping(path = "/admin/upload/blog", method = RequestMethod.GET)
+	@ResponseBody
+	public void uploadBlogHandler(RawBlogDO rawBlog) {
+		System.out.println(rawBlog.getType());
+		System.out.println(rawBlog.getTitle());
+		System.out.println(rawBlog.getContent());
+	}
+	
+	@RequestMapping(path = "/resources/upload/", method = RequestMethod.GET)
+	public void getImageHandler() {
+		
+	}
+	
 }
