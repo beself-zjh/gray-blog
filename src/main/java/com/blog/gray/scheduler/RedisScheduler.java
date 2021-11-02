@@ -47,14 +47,11 @@ public class RedisScheduler {
 	@Async
 	@Scheduled(cron = "0 0 0 * * ?")
 	public void pageViewSave() {
-		List<ArticleDO> articles = articleService.findAll();
+		List<ArticleDO> articles = articleService.findAll(); // findAll 获取的已经是总访问量
 		
 		articles.forEach(article -> {
 			String key = RedisKeyConstant.SINGLE_ARTICLE_PV + article.getId();
 			if (redisUtil.hasKey(key)) {
-				Long today = redisUtil.hllSize(key);
-				article.setVisits(article.getVisits() + today);
-				
 				articleRepository.save(article);
 				redisUtil.del(key); // 此处删除缓存内文章当日pv，不应该交给更新监听做这个任务，更新文章其他属性不应影响当日pv
 			}

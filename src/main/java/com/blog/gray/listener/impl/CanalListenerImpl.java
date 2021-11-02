@@ -90,8 +90,9 @@ public class CanalListenerImpl extends AbstractCanalListener {
 			try {
 				method.invoke(lp.getTarget(), args);
 			} catch (Exception e) {
+				
 				logger.error("{}: Error occurred when invoke the listener's interface! class:{}, method:{}",
-                        Thread.currentThread().getName(),
+						Thread.currentThread().getName(),
                         lp.getTarget().getClass().getName(), method.getName());
 			}
 		});	

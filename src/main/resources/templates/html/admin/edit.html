@@ -89,8 +89,9 @@
 									<i class="dropdown icon"></i>
 									<div class="default text">标签</div>
 									<div class="menu">
-										<div class="item" data-value="1">java web</div>
-										<div class="item" data-value="2">js</div>
+										<div class="item" data-value="1">spring</div>
+										<div class="item" data-value="2">springboot</div>
+										<div class="item" data-value="3">redis</div>
 									</div>
 								</div>
 							</div>
@@ -213,12 +214,18 @@
 		        var type = $("#type").val();
 		        var title = $("#title").val();
 		        var content = $("#editor").val();
+		        var labels = [];
+		        $(".ui.label.transition.visible").each(function(i,val){
+		            labels.push(val.getAttribute("data-value"));      
+		        });
+		        
 		        $.ajax({
 		            url: "/admin/upload/blog",
 		            data: {
 		            	type: type,
 		            	title: title, 
-		            	content: content
+		            	content: content,
+		            	labels: labels
 		            },
 		            success:function () {
 		                alert("发布成功");

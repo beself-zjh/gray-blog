@@ -1,6 +1,8 @@
 package com.blog.gray.service.impl;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -141,7 +143,7 @@ public class ArticleServiceImpl implements ArticleService {
 	 */
 	@Override
 	public List<ArticleDO> findDateSortedArticlesByLabel(int labelId) {
-		return articleRepository.findByLabels_id(labelId); //TODO 读取缓存中的访问量
+		return articleRepository.findByLabels_id(labelId);
 	}
 
 	/**   
@@ -165,6 +167,33 @@ public class ArticleServiceImpl implements ArticleService {
 			return articles.subList(Math.min(start, maxIndex), Math.min(end, maxIndex + 1));
 		}
 		return articles;
+	}
+
+	/**   
+	 * @title: createArticle
+	 * @description: 创建文章
+	 * @return  新文章对象
+	 * @see com.blog.gray.service.ArticleService#createArticle()     
+	 */
+	@Override
+	public ArticleDO createArticle(String title, String type, String Content, List<Integer> labels) {
+		ArticleDO article = new ArticleDO();
+		article.setCreatedTime(new Date(Calendar.getInstance().getTimeInMillis()));
+		article.setTitle(title);
+		article.setType(type);
+		
+		return article;
+	}
+
+	/**   
+	 * @title: save
+	 * @description: 保存文章
+	 * @param article   
+	 * @see com.blog.gray.service.ArticleService#save(com.blog.gray.domain.ArticleDO)     
+	 */
+	@Override
+	public void save(ArticleDO article) {
+		articleRepository.save(article);
 	}
 	
 	/**

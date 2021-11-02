@@ -30,9 +30,9 @@ import org.springframework.util.CollectionUtils;
 public class RedisUtil {
 
 	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
+	private RedisTemplate<Object, Object> redisTemplate;
 
-	public RedisUtil(RedisTemplate<String, Object> redisTemplate) {
+	public RedisUtil(RedisTemplate<Object, Object> redisTemplate) {
 		this.redisTemplate = redisTemplate;
 	}
 
@@ -72,7 +72,7 @@ public class RedisUtil {
 	 */
 	public boolean clear() {
 		try {
-			Set<String> keys = redisTemplate.keys("*");
+			Set<Object> keys = redisTemplate.keys("*");
 			redisTemplate.delete(keys);
 			return true;
 		} catch (Exception e) {

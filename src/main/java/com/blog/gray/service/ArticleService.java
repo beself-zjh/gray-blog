@@ -80,5 +80,18 @@ public interface ArticleService {
 	 *@return 文章数量
 	 */
 	public Integer size();
+	
+	/**
+	 *@title: createArticle 
+	 *@description: 创建文章
+	 *@return 新文章对象
+	 */
+	public ArticleDO createArticle(String title, String type, String Content, List<Integer> labels);
+	
+	/**
+	 *@title: save 
+	 *@description: 保存文章
+	 */
+	public void save(ArticleDO article);
 
 }

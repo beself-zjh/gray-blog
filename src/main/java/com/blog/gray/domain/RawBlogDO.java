@@ -7,6 +7,8 @@
  */
 package com.blog.gray.domain;
 
+import java.util.List;
+
 /**
  * @title: RawBlogDO.java
  * @package com.blog.gray.domain
@@ -19,7 +21,14 @@ public class RawBlogDO {
 	private String type;
 	private String title;
 	private String content;
+	private List<Integer> labels;
 	
+	public List<Integer> getLabels() {
+		return labels;
+	}
+	public void setLabels(List<Integer> labels) {
+		this.labels = labels;
+	}
 	public String getType() {
 		return type;
 	}

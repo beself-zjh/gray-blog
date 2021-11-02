@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.blog.gray.annotation.PageView;
 import com.blog.gray.domain.RawBlogDO;
 import com.blog.gray.factory.ViewModelFactory;
+import com.blog.gray.service.ArticleService;
 import com.blog.gray.viewmodel.AboutMeViewModel;
 import com.blog.gray.viewmodel.ArchivesViewModel;
 import com.blog.gray.viewmodel.FooterViewModel;
@@ -56,6 +57,9 @@ public class HomeController {
 	
 	@Autowired
 	private ViewModelFactory viewModelFactory;
+	
+	@Autowired
+	private ArticleService articleService;
 
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public String homeHandler(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page, 
@@ -155,9 +159,10 @@ public class HomeController {
 	@RequestMapping(path = "/admin/upload/blog", method = RequestMethod.GET)
 	@ResponseBody
 	public void uploadBlogHandler(RawBlogDO rawBlog) {
-		System.out.println(rawBlog.getType());
-		System.out.println(rawBlog.getTitle());
-		System.out.println(rawBlog.getContent());
+		articleService.save(articleService.createArticle(
+				rawBlog.getTitle(), rawBlog.getType(), 
+				rawBlog.getContent(), rawBlog.getLabels()
+		));
 	}
 	
 	@RequestMapping(path = "/resources/upload/", method = RequestMethod.GET)
