@@ -92,6 +92,6 @@ public interface ArticleService {
 	 *@title: save 
 	 *@description: 保存文章
 	 */
-	public void save(ArticleDO article);
+	public ArticleDO save(ArticleDO article);
 
 }

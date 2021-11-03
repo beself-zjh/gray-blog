@@ -9,6 +9,9 @@ package com.blog.gray.service.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import org.springframework.stereotype.Service;
 
@@ -51,6 +54,32 @@ public class FileServiceImpl implements FileService {
 			e.printStackTrace();// TODO log
 		}
 		return content;
+	}
+
+	/**   
+	 * @title: mdFileSave
+	 * @description: 保存markdown文件
+	 * @param path   
+	 * @see com.blog.gray.service.FileService#mdFileSave(java.lang.String)     
+	 */
+	@Override
+	public boolean mdFileSave(String path, String content) {
+		File file = new File(path);
+        
+		try {
+			if (!file.exists()) {  
+	        	file.createNewFile();  
+	        }  
+	        byte[] bytes = new byte[512];   
+	        bytes = content.getBytes();  
+	        int len = bytes.length;   // 字节的长度，不是字符串的长度
+	        FileOutputStream fos = new FileOutputStream(file); 
+	        fos.write(bytes, 0, len); 
+	        fos.close();
+		} catch (IOException e) {
+			return false;
+		} 
+        return true;
 	}
 
 }

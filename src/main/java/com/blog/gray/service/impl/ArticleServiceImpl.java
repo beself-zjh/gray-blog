@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.blog.gray.dao.ArticleRepository;
 import com.blog.gray.dao.LabelRepository;
 import com.blog.gray.domain.ArticleDO;
+import com.blog.gray.domain.LabelDO;
 import com.blog.gray.service.ArticleService;
 import com.blog.gray.util.ViewCodeUtil;
 import com.blog.gray.util.ViewCodeUtil.ViewResultCodeEnum;
@@ -176,11 +177,20 @@ public class ArticleServiceImpl implements ArticleService {
 	 * @see com.blog.gray.service.ArticleService#createArticle()     
 	 */
 	@Override
-	public ArticleDO createArticle(String title, String type, String Content, List<Integer> labels) {
+	public ArticleDO createArticle(String title, String type, String content, List<Integer> labels) {
 		ArticleDO article = new ArticleDO();
 		article.setCreatedTime(new Date(Calendar.getInstance().getTimeInMillis()));
 		article.setTitle(title);
 		article.setType(type);
+
+		// 设置摘要
+		String summary = content.replaceAll("#", "").replaceAll("\n", " ");
+		summary = summary.substring(0, Math.min(summary.length(), 200));
+		article.setSummary(summary);
+
+		// 设置标签
+		List<LabelDO> labelList = labelRepository.findAllById(labels);
+		article.setLabels(labelList);
 		
 		return article;
 	}
@@ -192,8 +202,8 @@ public class ArticleServiceImpl implements ArticleService {
 	 * @see com.blog.gray.service.ArticleService#save(com.blog.gray.domain.ArticleDO)     
 	 */
 	@Override
-	public void save(ArticleDO article) {
-		articleRepository.save(article);
+	public ArticleDO save(ArticleDO article) {
+		return articleRepository.save(article);
 	}
 	
 	/**

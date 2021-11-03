@@ -24,9 +24,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.blog.gray.annotation.PageView;
+import com.blog.gray.config.WebConfig;
+import com.blog.gray.domain.ArticleDO;
 import com.blog.gray.domain.RawBlogDO;
 import com.blog.gray.factory.ViewModelFactory;
 import com.blog.gray.service.ArticleService;
+import com.blog.gray.service.FileService;
 import com.blog.gray.viewmodel.AboutMeViewModel;
 import com.blog.gray.viewmodel.ArchivesViewModel;
 import com.blog.gray.viewmodel.FooterViewModel;
@@ -42,6 +45,9 @@ import com.blog.gray.viewmodel.HeaderViewModel;
  */
 @Controller
 public class HomeController {
+	
+	@Autowired
+	private WebConfig webConfig;
 	
 	@Autowired
 	private HeaderViewModel headerViewModel;
@@ -60,7 +66,20 @@ public class HomeController {
 	
 	@Autowired
 	private ArticleService articleService;
+	
+	@Autowired
+	private FileService fileService;
 
+	@RequestMapping(path = "/", method = RequestMethod.GET)
+	public String indexHandler(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page, 
+							  Model model) {
+		model.addAttribute("headerViewModel", headerViewModel);
+		model.addAttribute("footerViewModel", footerViewModel);
+		model.addAttribute("homeViewModel", viewModelFactory.createHomeViewModel(page));
+		
+		return "html/home";
+	}
+	
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public String homeHandler(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page, 
 							  Model model) {
@@ -159,10 +178,12 @@ public class HomeController {
 	@RequestMapping(path = "/admin/upload/blog", method = RequestMethod.GET)
 	@ResponseBody
 	public void uploadBlogHandler(RawBlogDO rawBlog) {
-		articleService.save(articleService.createArticle(
+		ArticleDO article = articleService.save(articleService.createArticle(
 				rawBlog.getTitle(), rawBlog.getType(), 
 				rawBlog.getContent(), rawBlog.getLabels()
-		));
+				));
+		String path = webConfig.getBlogDirPath() + File.separator + article.getId() + ".md";
+		while (!fileService.mdFileSave(path, rawBlog.getContent()));
 	}
 	
 	@RequestMapping(path = "/resources/upload/", method = RequestMethod.GET)

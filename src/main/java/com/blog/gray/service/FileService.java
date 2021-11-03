@@ -25,4 +25,11 @@ public interface FileService {
 	 */
 	public String mdFileRead(String path);
 
+	/**
+	 * @title: mdFileSave
+	 * @description: 保存markdown文件
+	 * @param path 文件路径
+	 */
+	public boolean mdFileSave(String path, String content);
+	
 }
