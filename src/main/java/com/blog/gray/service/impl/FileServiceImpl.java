@@ -9,9 +9,9 @@ package com.blog.gray.service.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import org.springframework.stereotype.Service;
 
@@ -65,18 +65,16 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public boolean mdFileSave(String path, String content) {
 		File file = new File(path);
-        
+        // TODO 编码格式有问题
 		try {
 			if (!file.exists()) {  
 	        	file.createNewFile();  
 	        }  
-	        byte[] bytes = new byte[512];   
-	        bytes = content.getBytes();  
-	        int len = bytes.length;   // 字节的长度，不是字符串的长度
-	        FileOutputStream fos = new FileOutputStream(file); 
-	        fos.write(bytes, 0, len); 
-	        fos.close();
-		} catch (IOException e) {
+	        OutputStreamWriter op = new OutputStreamWriter(new FileOutputStream(file), "utf-8");
+	        op.append(content);
+	        op.flush();
+	        op.close();
+	    } catch (IOException e) {
 			return false;
 		} 
         return true;
