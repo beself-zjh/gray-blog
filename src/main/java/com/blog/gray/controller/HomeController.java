@@ -27,9 +27,11 @@ import com.blog.gray.annotation.PageView;
 import com.blog.gray.config.WebConfig;
 import com.blog.gray.domain.ArticleDO;
 import com.blog.gray.domain.RawBlogDO;
+import com.blog.gray.domain.ReviewDO;
 import com.blog.gray.factory.ViewModelFactory;
 import com.blog.gray.service.ArticleService;
 import com.blog.gray.service.FileService;
+import com.blog.gray.service.ReviewService;
 import com.blog.gray.viewmodel.AboutMeViewModel;
 import com.blog.gray.viewmodel.ArchivesViewModel;
 import com.blog.gray.viewmodel.FooterViewModel;
@@ -66,6 +68,9 @@ public class HomeController {
 	
 	@Autowired
 	private ArticleService articleService;
+	
+	@Autowired
+	private ReviewService reviewService;
 	
 	@Autowired
 	private FileService fileService;
@@ -186,9 +191,15 @@ public class HomeController {
 		while (!fileService.mdFileSave(path, rawBlog.getContent()));
 	}
 	
+	// 文章请求显示图片
 	@RequestMapping(path = "/resources/upload/", method = RequestMethod.GET)
 	public void getImageHandler() {
 		
 	}
 	
+	@RequestMapping(path = "/admin/upload/review", method = RequestMethod.GET)
+	@ResponseBody
+	public void uploadReviewHandler(ReviewDO review) {
+		reviewService.save(review);
+	}	
 }

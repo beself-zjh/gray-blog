@@ -40,7 +40,7 @@
 					<img src="" alt="" class="ui fluid rounded image">
 				</div>
 				<!-- 正文内容区域 -->
-				<div class="ui attached padded segment">
+				<div id="articleId" th:data-value="${blogViewModel.article.id}" class="ui attached padded segment">
 					<!-- 文章类型 -->
 					<div class="ui right aligned basic segment">
 						<div th:id="${blogViewModel.article.type}" th:text="${blogViewModel.article.type}" class="ui orange basic label"></div>
@@ -102,7 +102,7 @@
 					      <img src="img/user.png">
 					    </a>
 					    <div class="content">
-					      <a class="author"><font style="vertical-align: inherit;"><font th:text="${review.reviewerName}" style="vertical-align: inherit;"></font></font></a>
+					      <a class="author"><font style="vertical-align: inherit;"><font th:id="'review_' + ${review.id}" th:text="${review.reviewerName}" style="vertical-align: inherit;"></font></font></a>
 					      <div class="metadata">
 					        <span class="date"><font style="vertical-align: inherit;"><font th:text="${review.date}" style="vertical-align: inherit;"></font></font></span>
 					      </div>
@@ -110,7 +110,7 @@
 					        <p><font style="vertical-align: inherit;"><font th:text="${review.content}" style="vertical-align: inherit;"></font></font></p>
 					      </div>
 					      <div class="actions">
-					        <a class="reply"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复</font></font></a>
+					        <a th:id="${review.id}" onclick="reply(this)" class="reply"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复</font></font></a>
 					      </div>
 					    </div>
 					    <div class="comments">
@@ -124,9 +124,6 @@
 					            <span class="date"><font style="vertical-align: inherit;"><font th:text="${reply.date}" style="vertical-align: inherit;"></font></font></span>
 					          </div>
 					          <div class="text"><font style="vertical-align: inherit;"><font th:text="${reply.content}" style="vertical-align: inherit;"></font></font></div>
-					          <div class="actions">
-					            <a class="reply"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复</font></font></a>
-					          </div>
 					        </div>
 					      </div>
 					    </div>
@@ -138,24 +135,24 @@
 				<div class="ui form">
 					<!-- 留言内容输入 -->
 					<div class="field">
-						<textarea name="content" placeholder="请输入评论信息..."></textarea>
+						<textarea id="review" name="content" placeholder="请输入评论信息..."></textarea>
 					</div>
 					<!-- 留言用户基本信息 -->
 					<div class="fields">
 						<div class="field m-mobile-wide m-marign-bottom-small">
 							<div class="ui left icon input">
 								<i class="user icon"></i>
-								<input type="text" name="nickname" placeholder="姓名" />
+								<input id="user" type="text" name="nickname" placeholder="姓名" />
 							</div>
 						</div>
 						<div class="field m-mobile-wide m-marign-bottom-small">
 							<div class="ui left icon input">
 								<i class="user icon"></i>
-								<input type="text" name="Email" placeholder="邮箱" />
+								<input id="email" type="text" name="Email" placeholder="邮箱" />
 							</div>
 						</div>
 						<div class="field m-marign-bottom-small m-mobile-wide">
-							<button class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>
+							<button id="submit" type="button" class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>
 						</div>
 					</div>
 				</div>
@@ -284,6 +281,55 @@
 			  console.log('Scrolled to waypoint!' + direction);
 			  }
 			})
+			
+			// 评论提交
+			$("#submit").click(
+		        function () {
+		        	if($("#review").val() != "")
+		            	submitReview();
+		        })
+		    
+		    var replyId = -1;
+			var replyName = "";
+			
+		    function submitReview() {
+		    	if(replyId != -1) {
+		    		if($("#review").val().search(replyName) != 0){
+		    			replyId = -1;
+		    		}
+		    	}
+		    	
+				var articleId = $("#articleId").attr("data-value");
+		        var reviewerName = $("#user").val() == "" ? "匿名" : $("#user").val();
+		        var reviewerEmail = $("#email").val();
+		        var content = $("#review").val();
+		        var isReply = (replyId != -1);
+		        
+		        $.ajax({
+		            url: "/admin/upload/review",
+		            data: {
+		            	articleId: articleId,
+		            	reviewerName: reviewerName,
+		            	reviewerEmail: reviewerEmail,
+		            	content: content,
+		            	isReply: isReply,
+		            	replyId: replyId
+		            },
+		            success:function () {
+			            window.location.reload(true);
+		            },
+		            error:function () {
+		                alert("发布失败");
+		            }
+		        })
+		    }
+			
+			// 评论回复
+			function reply(obj) {
+				replyId = obj.id;
+				replyName = "@" + $("#review_" + obj.id).text() + "  ";
+				$("#review").val(replyName);			
+			}
 		</script>
 	</body>
 </html>

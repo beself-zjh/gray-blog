@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * @title: Comment.java
@@ -55,7 +56,8 @@ public class ReviewDO implements Comparable<ReviewDO> {
 	@Column
 	private Integer replyId = -1;
 	
-	private TreeSet<ReviewDO> replys = new TreeSet<ReviewDO>();
+	@Transient
+	private TreeSet<ReviewDO> replys;
 
 	public Integer getId() {
 		return id;

@@ -59,4 +59,16 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviews;
 	}
 
+	/**   
+	 * @title: save
+	 * @description: 保存评论
+	 * @param review 评论
+	 * @return 保存后的评论
+	 * @see com.blog.gray.service.ReviewService#save(com.blog.gray.domain.ReviewDO)     
+	 */
+	@Override
+	public ReviewDO save(ReviewDO review) {
+		return reviewRepository.save(review);
+	}
+
 }

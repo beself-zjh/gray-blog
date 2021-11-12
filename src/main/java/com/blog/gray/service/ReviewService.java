@@ -28,5 +28,13 @@ public interface ReviewService {
 	 *@return 评论列表
 	 */
 	public List<ReviewDO> findByArticleId(Integer id);
+	
+	/**
+	 *@title: save 
+	 *@description: 保存评论
+	 *@param review 评论
+	 *@return 保存后的评论
+	 */
+	public ReviewDO save(ReviewDO review);
 
 }
