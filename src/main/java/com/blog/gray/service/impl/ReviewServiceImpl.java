@@ -7,10 +7,11 @@
  */
 package com.blog.gray.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class ReviewServiceImpl implements ReviewService {
 	 * @see com.blog.gray.service.ReviewService#findByArticleId(java.lang.Integer)     
 	 */
 	@Override
-	public TreeSet<ReviewDO> findByArticleId(Integer id) {
+	public List<ReviewDO> findByArticleId(Integer id) {
 		Map<Integer, ReviewDO> reviewsMap = new HashMap<Integer, ReviewDO>();
 		List<ReviewDO> reviewAndReply = reviewRepository.findByArticleId(id);
 		
@@ -52,7 +53,8 @@ public class ReviewServiceImpl implements ReviewService {
 			reviewsMap.get(r.getReplyId()).addReply(r);;
 		});
 		
-		TreeSet<ReviewDO> reviews = new TreeSet<ReviewDO>(reviewsMap.values());
+		List<ReviewDO> reviews = new ArrayList<ReviewDO>(reviewsMap.values());
+		Collections.sort(reviews);
 		
 		return reviews;
 	}

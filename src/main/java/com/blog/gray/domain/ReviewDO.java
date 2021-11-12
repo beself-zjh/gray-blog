@@ -130,6 +130,8 @@ public class ReviewDO implements Comparable<ReviewDO> {
 	 * @description: 添加回复
 	 */
 	public void addReply(ReviewDO reply) {
+		if (this.replys == null)
+			this.replys = new TreeSet<ReviewDO>();
 		this.replys.add(reply);
 	}
 	
@@ -148,7 +150,7 @@ public class ReviewDO implements Comparable<ReviewDO> {
 		if (before) return -1;
 		if (after) return 1;
 		
-		return 0;
+		return id - o.getId();
 	}
 
 }

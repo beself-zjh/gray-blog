@@ -15,6 +15,7 @@ import com.blog.gray.factory.ViewModelFactory;
 import com.blog.gray.service.ArticleService;
 import com.blog.gray.service.FileService;
 import com.blog.gray.service.LabelService;
+import com.blog.gray.service.ReviewService;
 import com.blog.gray.util.MarkdownUtil;
 import com.blog.gray.viewmodel.BlogViewModel;
 import com.blog.gray.viewmodel.HomeViewModel;
@@ -33,6 +34,9 @@ public class ViewModelFactoryImpl implements ViewModelFactory {
 
 	@Autowired
 	private ArticleService articleService;
+	
+	@Autowired
+	private ReviewService reviewService;
 	
 	@Autowired
 	private LabelService labelService;
@@ -86,7 +90,7 @@ public class ViewModelFactoryImpl implements ViewModelFactory {
 	 */
 	@Override
 	public BlogViewModel createBlogViewModel(Integer id) {
-		BlogViewModel blogViewModel = new BlogViewModel(articleService, webConfig, fileService, markdownUtil, id);			
+		BlogViewModel blogViewModel = new BlogViewModel(articleService, webConfig, fileService, reviewService, markdownUtil, id);			
 		blogViewModel.init();
 		
 		return blogViewModel;

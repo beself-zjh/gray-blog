@@ -96,52 +96,34 @@
 				<div class="ui teal segment">
 					<div class="ui comments">
 					  <h3 class="ui dividing header"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评论(功能暂未上线)</font></font></h3>
-					  <div class="comment">
+					  
+					  <div class="comment" th:each="review : ${blogViewModel.reviews}">
 					    <a class="avatar">
-					      <img src="https://i.picsum.photos/id/1005/100/100.jpg">
+					      <img src="img/user.png">
 					    </a>
 					    <div class="content">
-					      <a class="author"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">马特</font></font></a>
+					      <a class="author"><font style="vertical-align: inherit;"><font th:text="${review.reviewerName}" style="vertical-align: inherit;"></font></font></a>
 					      <div class="metadata">
-					        <span class="date"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">今天下午5:42</font></font></span>
-					      </div>
-					      <div class="text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-					        多么艺术！
-					      </font></font></div>
-					      <div class="actions">
-					        <a class="reply"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复</font></font></a>
-					      </div>
-					    </div>
-					  </div>
-					  <div class="comment">
-					    <a class="avatar">
-					      <img src="https://i.picsum.photos/id/1005/100/100.jpg">
-					    </a>
-					    <div class="content">
-					      <a class="author"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">傅lio</font></font></a>
-					      <div class="metadata">
-					        <span class="date"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">昨天上午12:30</font></font></span>
+					        <span class="date"><font style="vertical-align: inherit;"><font th:text="${review.date}" style="vertical-align: inherit;"></font></font></span>
 					      </div>
 					      <div class="text">
-					        <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">这对我的研究非常有用。</font><font style="vertical-align: inherit;">也谢谢！</font></font></p>
+					        <p><font style="vertical-align: inherit;"><font th:text="${review.content}" style="vertical-align: inherit;"></font></font></p>
 					      </div>
 					      <div class="actions">
 					        <a class="reply"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复</font></font></a>
 					      </div>
 					    </div>
 					    <div class="comments">
-					      <div class="comment">
+					      <div class="comment" th:each="reply : ${review.replys}">
 					        <a class="avatar">
-					          <img src="https://i.picsum.photos/id/1005/100/100.jpg">
+					          <img src="img/user.png">
 					        </a>
 					        <div class="content">
-					          <a class="author"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">珍妮·赫斯（Jenny Hess）</font></font></a>
+					          <a class="author"><font style="vertical-align: inherit;"><font th:text="${reply.reviewerName}" style="vertical-align: inherit;"></font></font></a>
 					          <div class="metadata">
-					            <span class="date"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">现在</font></font></span>
+					            <span class="date"><font style="vertical-align: inherit;"><font th:text="${reply.date}" style="vertical-align: inherit;"></font></font></span>
 					          </div>
-					          <div class="text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-					            艾略特，你总是很正确:)
-					          </font></font></div>
+					          <div class="text"><font style="vertical-align: inherit;"><font th:text="${reply.content}" style="vertical-align: inherit;"></font></font></div>
 					          <div class="actions">
 					            <a class="reply"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复</font></font></a>
 					          </div>
@@ -149,23 +131,7 @@
 					      </div>
 					    </div>
 					  </div>
-					  <div class="comment">
-					    <a class="avatar">
-					      <img src="https://i.picsum.photos/id/1005/100/100.jpg">
-					    </a>
-					    <div class="content">
-					      <a class="author"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">乔·亨德森</font></font></a>
-					      <div class="metadata">
-					        <span class="date"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5天前</font></font></span>
-					      </div>
-					      <div class="text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-					        杜德，太棒了。</font><font style="vertical-align: inherit;">非常感谢
-					      </font></font></div>
-					      <div class="actions">
-					        <a class="reply"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复</font></font></a>
-					      </div>
-					    </div>
-					  </div>
+					  
 					</div>
 				</div>
 				<!-- 提交留言区域 -->

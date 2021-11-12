@@ -7,7 +7,7 @@
  */
 package com.blog.gray.service;
 
-import java.util.TreeSet;
+import java.util.List;
 
 import com.blog.gray.domain.ReviewDO;
 
@@ -27,6 +27,6 @@ public interface ReviewService {
 	 *@param id 文章id
 	 *@return 评论列表
 	 */
-	public TreeSet<ReviewDO> findByArticleId(Integer id);
+	public List<ReviewDO> findByArticleId(Integer id);
 
 }
