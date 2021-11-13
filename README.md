@@ -129,12 +129,12 @@ web.config.code = 000000000000
 以下为STS4（Spring Tool Suite 4）编译器上的打包过程
 1. 打开项目；
 2. 清理打包记录，右键项目 → Run As → Maven clean；
-![](https://github.com/gray-blog/doc/maven_clean.png)
-![](https://github.com/gray-blog/doc/maven_clean_success.png)
+![](https://github.com/beself-zjh/gray-blog/blob/main/doc/maven_clean.png)
+![](https://github.com/beself-zjh/gray-blog/blob/main/doc/maven_clean_success.png)
 3. 打包，右键项目 → Run As → Maven install；
-![](https://github.com/gray-blog/doc/maven_install.png)
-![](https://github.com/gray-blog/doc/maven_install_success.png)
+![](https://github.com/beself-zjh/gray-blog/blob/main/doc/maven_install.png)
+![](https://github.com/beself-zjh/gray-blog/blob/main/doc/maven_install_success.png)
 4. 如果出现类似下面这种打包失败的情况，请将`src/test/java`下的所有代码注释掉。
-![](https://github.com/gray-blog/doc/maven_install_failure.png)
+![](https://github.com/beself-zjh/gray-blog/blob/main/doc/maven_install_failure.png)
 
-## [更新日志](https://github.com/gray-blog/doc/Log.md)
+## [更新日志](https://github.com/beself-zjh/gray-blog/blob/main/doc/Log.md)
