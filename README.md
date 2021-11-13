@@ -122,7 +122,7 @@ web.config.code = 000000000000
 - alipay.png 支付宝付款码
 - avatar.png 头像
 - webb.png 背景
-- wechat.png 微信二维码
+- wechat.jpg 微信二维码
 将以上图片替换为自己的图片，文件名不要变。
 
 ## 项目部署

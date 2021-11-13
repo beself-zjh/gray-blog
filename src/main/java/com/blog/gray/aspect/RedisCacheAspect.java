@@ -23,6 +23,7 @@ import com.blog.gray.domain.LabelDO;
 import com.blog.gray.service.RedisKeyConstant;
 import com.blog.gray.util.RedisUtil;
 
+
 /**
  * @title: RedisCacheAspect.java
  * @package com.blog.gray.aspect
@@ -147,7 +148,7 @@ public class RedisCacheAspect {
 	/**
 	 *@title: findByLabelsAroundAdvice 
 	 *@description: 按标签id查找文章时，根据缓存临时访问量，更新文章总访问量
-	 *@param proceedingJoinPoint 切点 ArticleRepository.findById
+	 *@param proceedingJoinPoint 切点 ArticleRepository.findByLabels_id
 	 */
 	@SuppressWarnings("unchecked")
 	@Around("execution(* com.blog.gray.dao.ArticleRepository.findByLabels_id(..))")

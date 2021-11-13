@@ -95,7 +95,7 @@
 				<!-- 留言区域列表 -->
 				<div class="ui teal segment">
 					<div class="ui comments">
-					  <h3 class="ui dividing header"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评论(功能暂未上线)</font></font></h3>
+					  <h3 class="ui dividing header"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评论</font></font></h3>
 					  
 					  <div class="comment" th:each="review : ${blogViewModel.reviews}">
 					    <a class="avatar">
@@ -142,13 +142,13 @@
 						<div class="field m-mobile-wide m-marign-bottom-small">
 							<div class="ui left icon input">
 								<i class="user icon"></i>
-								<input id="user" type="text" name="nickname" placeholder="姓名" />
+								<input id="user" type="text" name="nickname" placeholder="姓名(选填)" />
 							</div>
 						</div>
 						<div class="field m-mobile-wide m-marign-bottom-small">
 							<div class="ui left icon input">
 								<i class="user icon"></i>
-								<input id="email" type="text" name="Email" placeholder="邮箱" />
+								<input id="email" type="text" name="Email" placeholder="邮箱(选填)" />
 							</div>
 						</div>
 						<div class="field m-marign-bottom-small m-mobile-wide">
@@ -170,8 +170,8 @@
 			</div>
 		</div>
 		<!-- 弹出二维码 -->
-		<div id="qrcode" class="ui wechat-qr flowing popup transition hidden " style="width: 130px !important;">
-			<!-- <img src="static/image/wechat.jpg" alt="" class="ui rounded image" style="width: 110px;"> -->
+		<div class="ui wechat-qr flowing popup transition hidden " style="width: 130px !important;">
+			<img src="img/wechat.jpg" alt="" class="ui rounded image" style="width: 110px;">
 		</div>
 		<!-- 弹出目录 -->
 		<div class="ui toc-container flowing popup transition hidden" style="width: 250px;">
@@ -255,14 +255,6 @@
 			$('.wechat').popup ({
 				popup : $('.wechat-qr'),
 				position : 'left center'
-			});
-			var qrcode = new QRCode("qrcode", {
-			    text: "http://jindo.dev.naver.com/collie",
-			    width: 110,
-			    height: 110,
-			    colorDark : "#000000",
-			    colorLight : "#ffffff",
-			    correctLevel : QRCode.CorrectLevel.H
 			});
 			// 平滑滚动至头部
 			$('#toTop-button').click(function(){

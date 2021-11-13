@@ -18,7 +18,6 @@ package com.blog.gray.service;
 public final class RedisKeyConstant {
 	public static final String SINGLE_ARTICLE = "article_";
 	public static final String SINGLE_ARTICLE_PV = "article_pv_";
-	public static final String SINGLE_ARTICLE_LABEL = "article_label_";
 	public static final String ALL_ARTICLE_ID = "articles_id";
 
 	public static final String SINGLE_LABEL = "label_";

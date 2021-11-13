@@ -47,6 +47,7 @@ public class ArticleListenerPoints {
 				break;
 			}
 		}
+		// 归档页面刷新
 		archivesViewModel.setFlag(true);
 	}
 	
