@@ -8,12 +8,13 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.blog.gray.annotation.EnableCanalClient;
 import com.blog.gray.config.WebConfig;
+import com.blog.gray.fileserver.config.FileUploadConfig;
 
 @SpringBootApplication
 @EnableCanalClient
 @EnableScheduling
 @EnableAsync
-@EnableConfigurationProperties(WebConfig.class)
+@EnableConfigurationProperties({WebConfig.class, FileUploadConfig.class})
 public class GrayBlogApplication {
 
 	public static void main(String[] args) {

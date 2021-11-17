@@ -8,12 +8,9 @@
 package com.blog.gray.controller;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.blog.gray.annotation.PageView;
 import com.blog.gray.config.WebConfig;
@@ -150,37 +146,7 @@ public class HomeController {
 		return "html/admin/edit";
 	}
 	
-	@RequestMapping(path = "/admin/upload/image", method = RequestMethod.POST)
-	public void uploadImageHandler(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "editormd-image-file", required = true) MultipartFile attach) {
-		try {
-	        request.setCharacterEncoding( "utf-8" );
-	        response.setHeader( "Content-Type" , "text/html" );
-	        String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
-	        
-	        // 文件路径不存在则需要创建文件路径
-	        File filePath=new File(rootPath);
-	        if(!filePath.exists()){
-	            filePath.mkdirs();
-	        }
-
-	        // 最终文件名
-	        File realFile=new File(rootPath + File.separator + attach.getOriginalFilename());
-	        FileUtils.copyInputStreamToFile(attach.getInputStream(), realFile);
-
-	        System.out.println(rootPath + File.separator + attach.getOriginalFilename());
-	        // 下面response返回的json格式是editor.md所限制的，规范输出就OK
-	        response.getWriter().write( "{\"success\": 1, \"message\":\"successfully upload\",\"url\":\"/resources/upload/" + attach.getOriginalFilename() + "\"}" );
-	    } catch (Exception e) {
-	        try {
-	            response.getWriter().write( "{\"success\":0}" );
-	        } catch (IOException e1) {
-	            e1.printStackTrace();
-	        }
-	    }
-	}
-	
-	@RequestMapping(path = "/admin/upload/blog", method = RequestMethod.GET)
+	@RequestMapping(path = "/admin/upload/blog", method = RequestMethod.POST)
 	@ResponseBody
 	public void uploadBlogHandler(RawBlogDO rawBlog) {
 		ArticleDO article = articleService.save(articleService.createArticle(
@@ -191,13 +157,7 @@ public class HomeController {
 		while (!fileService.mdFileSave(path, rawBlog.getContent()));
 	}
 	
-	// 文章请求显示图片
-	@RequestMapping(path = "/resources/upload/", method = RequestMethod.GET)
-	public void getImageHandler() {
-		
-	}
-	
-	@RequestMapping(path = "/admin/upload/review", method = RequestMethod.GET)
+	@RequestMapping(path = "/admin/upload/review", method = RequestMethod.POST)
 	@ResponseBody
 	public void uploadReviewHandler(ReviewDO review) {
 		reviewService.save(review);
