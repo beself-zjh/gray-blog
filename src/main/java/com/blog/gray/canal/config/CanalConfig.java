@@ -5,7 +5,7 @@
  * date: Oct 18, 20213:35:43 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.config;
+package com.blog.gray.canal.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.Ordered;

@@ -5,11 +5,11 @@
  * date: Oct 19, 20213:39:41 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.listener.listenerpoint;
+package com.blog.gray.canal.model;
 
 import java.lang.reflect.Method;
 
-import com.blog.gray.annotation.ListenPoint;
+import com.blog.gray.canal.annotation.ListenPoint;
 
 /**
  * @title: ListenerPoint.java

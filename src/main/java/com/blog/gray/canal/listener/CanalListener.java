@@ -5,7 +5,7 @@
  * date: Oct 19, 20213:17:52 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.listener;
+package com.blog.gray.canal.listener;
 
 /**
  * @title: CanalListener.java

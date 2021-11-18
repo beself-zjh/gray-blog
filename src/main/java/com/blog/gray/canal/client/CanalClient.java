@@ -5,7 +5,7 @@
  * date: Oct 18, 20214:26:46 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.service;
+package com.blog.gray.canal.client;
 
 /**
  * @title: CanalClientService.java
@@ -15,7 +15,7 @@ package com.blog.gray.service;
  * @date: Oct 18, 2021 4:26:46 PM
  * @version: V1.0
  */
-public interface CanalClientService {
+public interface CanalClient {
 
 	/**
 	 * @title: start

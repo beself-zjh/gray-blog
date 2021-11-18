@@ -5,11 +5,10 @@
  * date: Oct 19, 20212:04:15 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.service;
+package com.blog.gray.canal.client;
 
 import com.alibaba.otter.canal.client.CanalConnector;
-import com.blog.gray.factory.CanalConnectorFactory;
-import com.blog.gray.factory.CanalListenerFactory;
+import com.blog.gray.canal.listener.CanalListenerFactory;
 
 /**
  * @title: AbstractCanalClientService.java
@@ -19,7 +18,7 @@ import com.blog.gray.factory.CanalListenerFactory;
  * @date: Oct 19, 2021 2:04:15 PM
  * @version: V1.0
  */
-public abstract class AbstractCanalClientService implements CanalClientService {
+public abstract class AbstractCanalClient implements CanalClient {
 
 	/**
 	 * @Fields canalConnectorFactory : canal连接器工厂
@@ -31,7 +30,7 @@ public abstract class AbstractCanalClientService implements CanalClientService {
 	 */
 	protected final CanalListenerFactory canalListenerFactory;
 
-	public AbstractCanalClientService(CanalConnectorFactory canalConnectorFactory,
+	public AbstractCanalClient(CanalConnectorFactory canalConnectorFactory,
 			CanalListenerFactory canalListenerFactory) {
 		this.canalConnectorFactory = canalConnectorFactory;
 		this.canalListenerFactory = canalListenerFactory;
@@ -40,7 +39,7 @@ public abstract class AbstractCanalClientService implements CanalClientService {
 	/**
 	 * @title: start
 	 * @description: 启动客户端 ，获取连接器并对其操作
-	 * @see com.blog.gray.service.CanalClientService#start()
+	 * @see com.blog.gray.canal.client.CanalClient#start()
 	 */
 	@Override
 	public void start() {
@@ -50,7 +49,7 @@ public abstract class AbstractCanalClientService implements CanalClientService {
 	/**
 	 * @title: stop
 	 * @description: 终止客户端
-	 * @see com.blog.gray.service.CanalClientService#stop()
+	 * @see com.blog.gray.canal.client.CanalClient#stop()
 	 */
 	@Override
 	public abstract void stop();

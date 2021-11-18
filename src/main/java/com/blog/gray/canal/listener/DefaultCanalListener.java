@@ -5,7 +5,7 @@
  * date: Oct 19, 20215:03:51 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.listener.impl;
+package com.blog.gray.canal.listener;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -19,9 +19,8 @@ import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.alibaba.otter.canal.protocol.CanalEntry.RowChange;
 import com.alibaba.otter.canal.protocol.CanalEntry.RowData;
 import com.alibaba.otter.canal.protocol.Message;
-import com.blog.gray.config.CanalConfig;
-import com.blog.gray.listener.AbstractCanalListener;
-import com.blog.gray.listener.listenerpoint.ListenerPoint;
+import com.blog.gray.canal.config.CanalConfig;
+import com.blog.gray.canal.model.ListenerPoint;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 /**
@@ -32,7 +31,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
  * @date: Oct 19, 2021 5:03:51 PM
  * @version: V1.0
  */
-public class CanalListenerImpl extends AbstractCanalListener {
+public class DefaultCanalListener extends AbstractCanalListener {
 
 	/**
 	 * @title: CanalListener
@@ -41,7 +40,7 @@ public class CanalListenerImpl extends AbstractCanalListener {
 	 * @param annoListenerPoints 监听点注解
 	 * @throws:
 	 */
-	public CanalListenerImpl(CanalConfig canalConfig, CanalConnector connector, List<ListenerPoint> annoListenerPoints) {
+	public DefaultCanalListener(CanalConfig canalConfig, CanalConnector connector, List<ListenerPoint> annoListenerPoints) {
 		super(canalConfig, connector, annoListenerPoints);
 	}
 
@@ -49,7 +48,7 @@ public class CanalListenerImpl extends AbstractCanalListener {
 	 * @title: distributeEvent
 	 * @description: 分发处理数据库更新事件
 	 * @param message 数据库更新日志解析
-	 * @see com.blog.gray.listener.AbstractCanalListener#distributeEvent(com.alibaba.otter.canal.protocol.Message)
+	 * @see com.blog.gray.canal.listener.AbstractCanalListener#distributeEvent(com.alibaba.otter.canal.protocol.Message)
 	 */
 	@Override
 	protected void distributeEvent(Message message) {

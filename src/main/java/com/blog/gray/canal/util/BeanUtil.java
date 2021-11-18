@@ -5,7 +5,7 @@
  * date: Oct 20, 202112:26:06 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.util;
+package com.blog.gray.canal.util;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;

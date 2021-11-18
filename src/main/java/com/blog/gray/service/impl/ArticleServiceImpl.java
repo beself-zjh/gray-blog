@@ -185,6 +185,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 		// 设置摘要
 		String summary = content.replaceAll("#", "").replaceAll("\n", " ");
+		// TODO 摘要字数 200 硬编码 待改
 		summary = summary.substring(0, Math.min(summary.length(), 200));
 		article.setSummary(summary);
 

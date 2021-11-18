@@ -5,15 +5,15 @@
  * date: Oct 18, 20213:45:25 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.config;
+package com.blog.gray.canal.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
-import com.blog.gray.factory.CanalConnectorFactory;
-import com.blog.gray.factory.CanalListenerFactory;
-import com.blog.gray.service.CanalClientService;
-import com.blog.gray.service.impl.CanalClientServiceImpl;
+import com.blog.gray.canal.client.CanalClient;
+import com.blog.gray.canal.client.DefaultCanalClient;
+import com.blog.gray.canal.client.CanalConnectorFactory;
+import com.blog.gray.canal.listener.CanalListenerFactory;
 
 /**
  * @title: CanalClientConfig.java
@@ -48,9 +48,9 @@ public class CanalClientConfiguration {
 	 * @description: canal客户端自动装配&启动
 	 */
 	@Bean
-	private CanalClientService canalClient() {
-		CanalClientService canalClientService = new CanalClientServiceImpl(canalConfig, canalConnectorFactory, canalListenerFactory);
-		canalClientService.start();
-		return canalClientService;
+	private CanalClient canalClient() {
+		CanalClient canalClient = new DefaultCanalClient(canalConfig, canalConnectorFactory, canalListenerFactory);
+		canalClient.start();
+		return canalClient;
 	}
 }

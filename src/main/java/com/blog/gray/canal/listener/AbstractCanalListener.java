@@ -5,7 +5,7 @@
  * date: Oct 19, 20213:18:47 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.listener;
+package com.blog.gray.canal.listener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.protocol.Message;
-import com.blog.gray.config.CanalConfig;
-import com.blog.gray.listener.listenerpoint.ListenerPoint;
+import com.blog.gray.canal.config.CanalConfig;
+import com.blog.gray.canal.model.ListenerPoint;
 
 /**
  * @title: AbstrctCanalListener.java

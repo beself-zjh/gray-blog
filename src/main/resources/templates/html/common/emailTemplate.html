@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Email Template</title>
+</head>
+
+<body>
+	**PLEASE DO NOT REPLY TO THIS EMAIL. IT IS NOT MONITORED**<br><br>
+
+	Dear <span th:text="${name} + ':'"></span><br>
+    New reply has been posted in <a th:src = "'/blog?id=' + ${articleId}">GrayBlog</a><br>
+    Copyright © 2021 GrayBlog<br><br>
+
+	You are receiving this email because you are subscribed to GrayBlog.
+</body>
+</html>

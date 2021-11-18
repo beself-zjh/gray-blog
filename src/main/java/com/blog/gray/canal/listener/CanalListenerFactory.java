@@ -5,14 +5,13 @@
  * date: Oct 27, 202112:06:26 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.factory;
+package com.blog.gray.canal.listener;
 
 import java.util.List;
 
 import com.alibaba.otter.canal.client.CanalConnector;
-import com.blog.gray.config.CanalConfig;
-import com.blog.gray.listener.CanalListener;
-import com.blog.gray.listener.listenerpoint.ListenerPoint;
+import com.blog.gray.canal.config.CanalConfig;
+import com.blog.gray.canal.model.ListenerPoint;
 
 /**
  * @title: CanalListenerFactory.java

@@ -5,11 +5,7 @@
  * date: Oct 28, 20211:28:30 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.factory;
-
-import com.blog.gray.viewmodel.BlogViewModel;
-import com.blog.gray.viewmodel.HomeViewModel;
-import com.blog.gray.viewmodel.TagsViewModel;
+package com.blog.gray.viewmodel;
 
 /**
  * @title: ViewModelFactory.java

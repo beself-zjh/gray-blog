@@ -5,7 +5,7 @@
  * date: Oct 22, 20212:42:37 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.annotation;
+package com.blog.gray.canal.annotation;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

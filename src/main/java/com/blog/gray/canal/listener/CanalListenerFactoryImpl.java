@@ -5,18 +5,15 @@
  * date: Oct 27, 202112:11:58 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.factory.impl;
+package com.blog.gray.canal.listener;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.alibaba.otter.canal.client.CanalConnector;
-import com.blog.gray.config.CanalConfig;
-import com.blog.gray.factory.CanalListenerFactory;
-import com.blog.gray.listener.CanalListener;
-import com.blog.gray.listener.impl.CanalListenerImpl;
-import com.blog.gray.listener.listenerpoint.ListenerPoint;
+import com.blog.gray.canal.config.CanalConfig;
+import com.blog.gray.canal.model.ListenerPoint;
 
 /**
  * @title: CanalListenerFactoryImpl.java
@@ -36,12 +33,12 @@ public class CanalListenerFactoryImpl implements CanalListenerFactory {
 	 * @param connector
 	 * @param annoListenerPoints
 	 * @return CanalListener
-	 * @see com.blog.gray.factory.CanalListenerFactory#newDefaultCanalListener(com.blog.gray.config.CanalConfig, com.alibaba.otter.canal.client.CanalConnector, java.util.List)     
+	 * @see com.blog.gray.canal.listener.CanalListenerFactory#newDefaultCanalListener(com.blog.gray.canal.config.CanalConfig, com.alibaba.otter.canal.client.CanalConnector, java.util.List)     
 	 */
 	@Override
 	public CanalListener newDefaultCanalListener(CanalConfig canalConfig, CanalConnector connector,
 			List<ListenerPoint> annoListenerPoints) {
-		return new CanalListenerImpl(canalConfig, connector, annoListenerPoints);
+		return new DefaultCanalListener(canalConfig, connector, annoListenerPoints);
 	}
 
 }

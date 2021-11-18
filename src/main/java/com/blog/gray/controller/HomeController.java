@@ -24,7 +24,6 @@ import com.blog.gray.config.WebConfig;
 import com.blog.gray.domain.ArticleDO;
 import com.blog.gray.domain.RawBlogDO;
 import com.blog.gray.domain.ReviewDO;
-import com.blog.gray.factory.ViewModelFactory;
 import com.blog.gray.service.ArticleService;
 import com.blog.gray.service.FileService;
 import com.blog.gray.service.ReviewService;
@@ -32,6 +31,7 @@ import com.blog.gray.viewmodel.AboutMeViewModel;
 import com.blog.gray.viewmodel.ArchivesViewModel;
 import com.blog.gray.viewmodel.FooterViewModel;
 import com.blog.gray.viewmodel.HeaderViewModel;
+import com.blog.gray.viewmodel.ViewModelFactory;
 
 /**
  * @title: HomeController.java
@@ -70,10 +70,33 @@ public class HomeController {
 	
 	@Autowired
 	private FileService fileService;
+	
+//	@Autowired
+//	private JavaMailSender javaMailSender;
+//	
+//	@Autowired
+//    private TemplateEngine templateEngine;
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String indexHandler(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page, 
 							  Model model) {
+		
+//		try {
+//            MimeMessage message = javaMailSender.createMimeMessage();
+//            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
+//            messageHelper.setFrom("zjh.beself@qq.com");
+//            messageHelper.setTo("2935138700@qq.com");
+//            messageHelper.setSubject("使用HTML模板文件发送邮件");
+//
+//            Context context = new Context();
+//            context.setVariable("name", "卷羊羊");
+//            context.setVariable("articleId", "1");
+//            messageHelper.setText(templateEngine.process("html/common/emailTemplate", context), true);
+//            javaMailSender.send(message);
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        }
+		
 		model.addAttribute("headerViewModel", headerViewModel);
 		model.addAttribute("footerViewModel", footerViewModel);
 		model.addAttribute("homeViewModel", viewModelFactory.createHomeViewModel(page));
@@ -149,6 +172,7 @@ public class HomeController {
 	@RequestMapping(path = "/admin/upload/blog", method = RequestMethod.POST)
 	@ResponseBody
 	public void uploadBlogHandler(RawBlogDO rawBlog) {
+		// TODO label.count 对应加1
 		ArticleDO article = articleService.save(articleService.createArticle(
 				rawBlog.getTitle(), rawBlog.getType(), 
 				rawBlog.getContent(), rawBlog.getLabels()

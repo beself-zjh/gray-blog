@@ -5,7 +5,7 @@
  * date: Oct 18, 20214:07:48 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.annotation;
+package com.blog.gray.canal.annotation;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -17,8 +17,8 @@ import java.lang.annotation.Target;
 
 import org.springframework.context.annotation.Import;
 
-import com.blog.gray.config.CanalClientConfiguration;
-import com.blog.gray.config.CanalConfig;
+import com.blog.gray.canal.config.CanalClientConfiguration;
+import com.blog.gray.canal.config.CanalConfig;
 
 @Documented
 @Retention(RUNTIME)

@@ -5,7 +5,7 @@
  * date: Oct 21, 20212:19:20 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.listener.listenerpoint;
+package com.blog.gray.listenerpoint;
 
 import java.util.List;
 
@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.otter.canal.protocol.CanalEntry.Column;
 import com.alibaba.otter.canal.protocol.CanalEntry.RowData;
-import com.blog.gray.annotation.DeleteListenPoint;
-import com.blog.gray.annotation.InsertListenPoint;
-import com.blog.gray.annotation.ListenPoints;
-import com.blog.gray.annotation.UpdateListenPoint;
+import com.blog.gray.canal.annotation.DeleteListenPoint;
+import com.blog.gray.canal.annotation.InsertListenPoint;
+import com.blog.gray.canal.annotation.ListenPoints;
+import com.blog.gray.canal.annotation.UpdateListenPoint;
 import com.blog.gray.service.RedisKeyConstant;
 import com.blog.gray.util.RedisUtil;
 import com.blog.gray.viewmodel.ArchivesViewModel;
@@ -47,13 +47,15 @@ public class ArticleListenerPoints {
 				break;
 			}
 		}
-		// 归档页面刷新
+		// 归档页面刷新  TODO 此行代码不优雅
 		archivesViewModel.setFlag(true);
 	}
 	
 	@InsertListenPoint(table = {"t_article"})
 	public void insertArticleEvent(RowData rowData) {
 		redisUtil.del(RedisKeyConstant.ALL_ARTICLE_ID);
+		
+		archivesViewModel.setFlag(true);
 	}
 	
 	@DeleteListenPoint(table = {"t_article"})
@@ -68,6 +70,8 @@ public class ArticleListenerPoints {
 				break;
 			}
 		}
+		
+		archivesViewModel.setFlag(true);
 	}
 
 }

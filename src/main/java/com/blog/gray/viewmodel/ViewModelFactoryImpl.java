@@ -5,21 +5,17 @@
  * date: Oct 28, 20211:31:15 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.factory.impl;
+package com.blog.gray.viewmodel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.blog.gray.config.WebConfig;
-import com.blog.gray.factory.ViewModelFactory;
 import com.blog.gray.service.ArticleService;
 import com.blog.gray.service.FileService;
 import com.blog.gray.service.LabelService;
 import com.blog.gray.service.ReviewService;
 import com.blog.gray.util.MarkdownUtil;
-import com.blog.gray.viewmodel.BlogViewModel;
-import com.blog.gray.viewmodel.HomeViewModel;
-import com.blog.gray.viewmodel.TagsViewModel;
 
 /**
  * @title: ViewModelFactoryImpl.java
@@ -55,7 +51,7 @@ public class ViewModelFactoryImpl implements ViewModelFactory {
 	 * @description: 创建HomeViewModel
 	 * @param page 页码
 	 * @return   
-	 * @see com.blog.gray.factory.ViewModelFactory#createHomeViewModel(Integer)     
+	 * @see com.blog.gray.viewmodel.ViewModelFactory#createHomeViewModel(Integer)     
 	 */
 	@Override
 	public HomeViewModel createHomeViewModel(Integer page) {
@@ -71,7 +67,7 @@ public class ViewModelFactoryImpl implements ViewModelFactory {
 	 * @param id 标签
 	 * @param page 页码
 	 * @return   
-	 * @see com.blog.gray.factory.ViewModelFactory#createTagsViewModel(Integer, Integer)     
+	 * @see com.blog.gray.viewmodel.ViewModelFactory#createTagsViewModel(Integer, Integer)     
 	 */
 	@Override
 	public TagsViewModel createTagsViewModel(Integer id, Integer page) {
@@ -86,7 +82,7 @@ public class ViewModelFactoryImpl implements ViewModelFactory {
 	 * @description: 创建BlogViewModel
 	 * @param id 文章id
 	 * @return   
-	 * @see com.blog.gray.factory.ViewModelFactory#createBlogViewModel(java.lang.Integer)     
+	 * @see com.blog.gray.viewmodel.ViewModelFactory#createBlogViewModel(java.lang.Integer)     
 	 */
 	@Override
 	public BlogViewModel createBlogViewModel(Integer id) {

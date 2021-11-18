@@ -5,7 +5,7 @@
  * date: Oct 18, 20214:47:15 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.factory;
+package com.blog.gray.canal.client;
 
 import com.alibaba.otter.canal.client.CanalConnector;
 

@@ -5,7 +5,7 @@
  * date: Oct 18, 20214:51:39 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.factory.impl;
+package com.blog.gray.canal.client;
 
 import java.net.InetSocketAddress;
 
@@ -15,8 +15,7 @@ import org.springframework.util.StringUtils;
 
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
-import com.blog.gray.config.CanalConfig;
-import com.blog.gray.factory.CanalConnectorFactory;
+import com.blog.gray.canal.config.CanalConfig;
 
 /**
  * @title: CanalConnectorFactoryImpl.java
@@ -39,7 +38,7 @@ public class CanalConnectorFactoryImpl implements CanalConnectorFactory {
 	 * @title: newDefaultConnector
 	 * @description: 按照配置参数创建canal连接器
 	 * @return 默认连接器创建
-	 * @see com.blog.gray.factory.CanalConnectorFactory#newDefaultConnector()
+	 * @see com.blog.gray.canal.client.CanalConnectorFactory#newDefaultConnector()
 	 */
 	@Override
 	public CanalConnector newDefaultConnector() {

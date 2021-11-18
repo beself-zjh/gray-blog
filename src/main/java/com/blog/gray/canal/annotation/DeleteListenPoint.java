@@ -1,11 +1,11 @@
 /** 
  * projectName: gray-blog 
- * fileName: InsertListenPoint.java 
+ * fileName: DeleteListenPoint.java 
  * packageName: com.blog.gray.annotation 
- * date: Oct 22, 20212:38:18 PM 
+ * date: Oct 22, 20212:43:42 PM 
  * copyright(c) 2017-2020 xxx公司
  */
-package com.blog.gray.annotation;
+package com.blog.gray.canal.annotation;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -21,17 +21,17 @@ import com.alibaba.otter.canal.protocol.CanalEntry;
 @Documented
 @Retention(RUNTIME)
 @Target(METHOD)
-@ListenPoint(eventType = {CanalEntry.EventType.INSERT})
+@ListenPoint(eventType = {CanalEntry.EventType.DELETE})
 /**
- * @title: InsertListenPoint.java
+ * @title: DeleteListenPoint.java
  * @package com.blog.gray.annotation
  * @description: TODO
  * @author: Zjh
- * @date: Oct 22, 2021 2:38:18 PM 
+ * @date: Oct 22, 2021 2:43:42 PM 
  * @version: V1.0   
  */
-public @interface InsertListenPoint {
-	
+public @interface DeleteListenPoint {
+
 	/**
 	 *@title: destination 
 	 *@description: canal destination
